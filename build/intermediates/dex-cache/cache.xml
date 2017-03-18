@@ -3,57 +3,39 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.2.0_cd33e2704f6511a678d478bab2ce30d993456ec4\classes.dex" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.2.0_dcddfa76fc51c12f4a7b096f286d6714fec58d2b\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.2.0_ef68ed59b1af3dde8a3aec08b1e87de93f3a2819\classes.dex" />
+        sha1="3ec0f1df1c6063bb9370bd419da5a545399d9637">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_e92ccdfd388d0b35a284644fb01475c0559383f5\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.2.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.2.0_41d060dde93a013623108f39bcb856310b1dd515\classes.dex" />
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.2.0_df0d56b0c94fb50125e9a2d3daf861e5196a7727\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.2.0_1199173da4a136546be63f0e7b1b063454c58641\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a860b6f6c1b2d8121442a8393cb24b51f4abc1ef">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_26b6d8bdee920d98d211aa97af0c5ff3fd3cdd8d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.2.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.2.0_7eafd2d77eebb78a6cd151a65993e331c2acca44\classes.dex" />
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.2.0_bcae97a07ad2a280954853f2b87ed0f3766dd399\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -62,52 +44,88 @@
         optimize="true"
         revision="25.0.2"
         sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.2.0_19afd7af854acae57e21587ea46d45f29975cb04\classes.dex" />
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.2.0_19afd7af854acae57e21587ea46d45f29975cb04\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.2.0_304c2d999a57bc596bfcdcce23820fbb604c672f\classes.dex" />
+        sha1="3eab46f4e614e993bd15976a95b34a1e19ab4dd0">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_489d103301cd399500301baa8eb43980e8b370fb\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.2.0_3cc475fadd1a585f646ef68dba227b89bb410bd2\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.2.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="810f41e5b7fd99f196ebeabe865ba2c54e7e76dc">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.2.0_608279b7fab2155505b37a0676fee9eedfc9aea2\classes.dex" />
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.2.0_12bc5223daec57cc1f74ce8899fcac65947f574e\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.2.0\jars\classes.jar"
+        jar="C:\Users\BenX\.gradle\wrapper\dists\gradle-2.14.1-all\8bnwg5hd3w55iofp58khbp6yv\gradle-2.14.1\caches\modules-2\files-2.1\commons-httpclient\commons-httpclient\3.1\964cd74171f427720480efdec40a7c7f6e58426a\commons-httpclient-3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="964cd74171f427720480efdec40a7c7f6e58426a">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-httpclient-3.1_d28a4a3421a2e06c17d2efb7ba8b5d99f494624c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.2.0_2ef5d94605daba4b69550044f1053ced8d663a54\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.2.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.2.0_ea12e1e5332a7ca615b85241d3c994cf1ee10d11\classes.dex" />
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.2.0_e93cbe31a2fac302bd198d5f0380a4a0c1d98269\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.2.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="e4a1f3bbe3ee3439dd0dbf631abc78d550fc6e1d">
-        <dex dex="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_08abcb6b660153fabd504438dbfbbc6a227bd853\classes.dex" />
+        sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.2.0_5702f454b97e2029927cb677e3a0298c350b8ad9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BenX\.gradle\wrapper\dists\gradle-2.14.1-all\8bnwg5hd3w55iofp58khbp6yv\gradle-2.14.1\caches\modules-2\files-2.1\commons-codec\commons-codec\1.2\397f4731a9f9b6eb1907e224911c77ea3aa27a8b\commons-codec-1.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="397f4731a9f9b6eb1907e224911c77ea3aa27a8b">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-codec-1.2_f84bc8b0ba664a66ebaf1958ce4dcbf299228d1b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.2.0_1be308f27c6f30153559d479d8c73e4d6efcb913\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.2.0_7c170fbe4367f4263224cee4917c69c2a3ffa1b1\classes.dex" />
     </item>
 
 </items>

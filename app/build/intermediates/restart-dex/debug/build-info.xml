@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    api-level="25"
-    density="420dpi"
+    api-level="21"
+    density="xhdpi"
     format="8"
     plugin-version="2.2.0"
-    timestamp="54115826705689"
-    token="1565053077706104062"
-    verifier="FULL_BUILD_REQUESTED" >
+    timestamp="1899042728536"
+    token="5036331308590808608"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="306" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="180" />
+        duration="0" />
     <task
         name="verifier"
-        duration="48" />
-
-    <artifact
-        location="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
+        duration="0" />
 
     <build
-        timestamp="54115826705689"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="1410414480834"
+        verifier="MANIFEST_FILE_CHANGE" >
         <artifact
-            location="C:\Users\BenX\Desktop\Android Project\Project_Time_Reminder\Time_Remider\app\build\outputs\apk\app-debug.apk"
+            location="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
+    <build
+        timestamp="1816375450077"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\BenX\Desktop\Android Project\Time Reminder\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="1899042728536"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
