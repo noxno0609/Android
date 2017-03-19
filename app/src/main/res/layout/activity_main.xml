@@ -12,7 +12,7 @@
         tools:context="com.example.thienpham.time_remider.MainActivity" android:background="@android:color/holo_blue_light">
 
     <TextView
-            android:text="TIME REMINDER"
+            android:text="Time Reminder"
             android:textSize="30dp"
             android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
@@ -25,21 +25,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_below="@+id/tvName"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/infoLogin">
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_gravity="center"
-                android:textSize="23dp"
-                android:id="@+id/etUserLogin"
-                android:layout_weight="1"
-                android:hint="UserID"
-                android:background="@android:color/background_light"/>
+        android:id="@+id/infoLogin"
+        android:layout_below="@+id/etUserLogin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <EditText
                 android:layout_width="wrap_content"
                 android:inputType="textPassword"
@@ -64,7 +53,7 @@
         <Button
                 android:text="ĐĂNG NHẬP"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:id="@+id/btDangnhap"
                 android:layout_weight="1"
                 android:layout_marginTop="15dp"
                 android:layout_below="@+id/cbRememberLogin"
@@ -77,7 +66,28 @@
                 android:layout_weight="1"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center"
-                android:text="Chưa có tài khoản? Đăng ký"
+                android:text="Chưa có tài khoản?"
                 android:textAlignment="center" android:textStyle="normal|bold"/>
     </LinearLayout>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:textSize="23dp"
+            android:id="@+id/etUserLogin"
+            android:layout_weight="1"
+            android:hint="UserID"
+            android:background="@android:color/background_light" android:layout_below="@+id/tvName"
+            android:layout_centerHorizontal="true" android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/btDangkiMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/infoLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Đăng kí" />
 </RelativeLayout>
