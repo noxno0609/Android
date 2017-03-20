@@ -10,17 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class ShowActivity extends AppCompatActivity {
-    private Button btHuy,btLichtrinh,btMoc;
-
+    private Button btLichtrinh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-        btHuy=(Button) findViewById(R.id.btHuy);
-        btLichtrinh=(Button) findViewById(R.id.btLichtrinh);
-        btMoc=(Button) findViewById(R.id.btMoc);
 
+        btLichtrinh=(Button) findViewById(R.id.btLichtrinh);
         btLichtrinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +25,5 @@ public class ShowActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

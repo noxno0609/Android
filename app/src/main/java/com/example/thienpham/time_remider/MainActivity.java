@@ -14,22 +14,15 @@ import static android.R.id.edit;
 
 public class MainActivity extends AppCompatActivity {
     //Khai bao gia tri
-    public TextView tv;
-    private EditText editName,editPass;
     private Button btDangnhap,btDangkiMain;
-    private CheckBox cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Anh xa acctitivy_main.xml
-        tv=(TextView) findViewById(R.id.tvName);
-        editName=(EditText) findViewById(R.id.etUserLogin);
-        editPass=(EditText) findViewById(R.id.etPassLogin);
+        //Anh xa actitivy_main.xml
         btDangnhap=(Button) findViewById(R.id.btDangnhap);
-        cb=(CheckBox) findViewById(R.id.cbRememberLogin);
         btDangkiMain=(Button) findViewById(R.id.btDangkiMain) ;
 
         btDangkiMain.setOnClickListener(new View.OnClickListener() {
