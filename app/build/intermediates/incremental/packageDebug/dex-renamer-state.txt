@@ -1,7 +1,7 @@
-#Sat Mar 18 14:56:17 ICT 2017
-base.0=C\:\\Users\\BenX\\Desktop\\Android Project\\Time Reminder\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_489d103301cd399500301baa8eb43980e8b370fb
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=C\:\\Users\\BenX\\Desktop\\Android Project\\Time Reminder\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_e92ccdfd388d0b35a284644fb01475c0559383f5\\classes.dex
-base.1=C\:\\Users\\BenX\\Desktop\\Android Project\\Time Reminder\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_e92ccdfd388d0b35a284644fb01475c0559383f5
-file.0=C\:\\Users\\BenX\\Desktop\\Android Project\\Time Reminder\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_489d103301cd399500301baa8eb43980e8b370fb\\classes.dex
+#Mon Mar 13 01:16:24 ICT 2017
+base.0=C\:\\Users\\BenX\\Desktop\\Android Project\\Project_Time_Reminder\\Time_Remider\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_26b6d8bdee920d98d211aa97af0c5ff3fd3cdd8d
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\BenX\\Desktop\\Android Project\\Project_Time_Reminder\\Time_Remider\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_08abcb6b660153fabd504438dbfbbc6a227bd853\\classes.dex
+base.1=C\:\\Users\\BenX\\Desktop\\Android Project\\Project_Time_Reminder\\Time_Remider\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_08abcb6b660153fabd504438dbfbbc6a227bd853
+file.0=C\:\\Users\\BenX\\Desktop\\Android Project\\Project_Time_Reminder\\Time_Remider\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_26b6d8bdee920d98d211aa97af0c5ff3fd3cdd8d\\classes.dex
