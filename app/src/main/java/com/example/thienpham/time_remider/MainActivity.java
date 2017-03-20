@@ -32,20 +32,21 @@ public class MainActivity extends AppCompatActivity {
         cb=(CheckBox) findViewById(R.id.cbRememberLogin);
         btDangkiMain=(Button) findViewById(R.id.btDangkiMain) ;
 
+        btDangkiMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
         btDangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, xemlichtrinh.class);
+                Intent intent = new Intent(MainActivity.this, ShowActivity.class);
                 startActivity(intent);
             }
         });
-        btDangkiMain.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public  void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, SignUPActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 }
 
