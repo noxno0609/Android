@@ -26,4 +26,14 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0'
+    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+}
+
+configurations {
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+}
+
+android {
+    useLibrary 'org.apache.http.legacy'
 }
