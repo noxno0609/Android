@@ -18,16 +18,23 @@
 
     <Button
             android:id="@+id/btSignup"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Đăng kí"
-            tools:layout_editor_absoluteX="148dp"
-            tools:layout_editor_absoluteY="270dp" />
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginRight="150dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="515dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:baselineAligned="false"
+        android:paddingTop="100dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="85dp"
         tools:layout_editor_absoluteY="78dp">
