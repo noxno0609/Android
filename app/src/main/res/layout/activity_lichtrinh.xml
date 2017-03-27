@@ -9,8 +9,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="7dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textView2"
@@ -20,7 +20,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
             android:text="Lịch trình"
-            android:textSize="20dp" />
+            android:textColor="#2962ff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -33,6 +35,7 @@
             android:orientation="horizontal"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:textColor="#2962ff"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="72dp">
 
@@ -44,7 +47,8 @@
                 android:ems="10"
                 android:hint="Ngày bắt đầu"
                 android:inputType="date"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#2962ff" />
 
             <EditText
                 android:id="@+id/etDayend"
@@ -54,7 +58,8 @@
                 android:ems="10"
                 android:hint="Ngày kết thúc"
                 android:inputType="date"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#2962ff" />
 
         </LinearLayout>
 
@@ -80,7 +85,8 @@
                 android:ems="10"
                 android:hint="Giờ bắt đầu"
                 android:inputType="time"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#2962ff" />
 
             <EditText
                 android:id="@+id/etTimeend"
@@ -90,7 +96,8 @@
                 android:ems="10"
                 android:hint="Giờ kết thúc"
                 android:inputType="time"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="#2962ff" />
         </LinearLayout>
 
         <LinearLayout
@@ -160,15 +167,15 @@
         <EditText
             android:id="@+id/etNameLT"
             android:layout_width="fill_parent"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView2"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
             android:layout_marginTop="12dp"
             android:ems="10"
-            android:hint="Tên lịch trình"
             android:gravity="center"
+            android:hint="Tên lịch trình"
             android:inputType="textPersonName" />
 
         <RadioButton
@@ -182,6 +189,14 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Mỗi ngày" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="19dp"
+            android:layout_below="@+id/rbAll"
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>
