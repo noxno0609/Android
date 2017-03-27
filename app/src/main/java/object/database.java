@@ -29,9 +29,13 @@ public class database {
 
     public static final String connIP = "192.168.1.40";
 
-    public static String getMethod() {
+    public static String getMethod(int type) {
 
-        String url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
+        String url = "";
+        if(type == define.DTO.TimeEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
+        else if(type == define.DTO.PeriodEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent";
 
         StringBuffer result = new StringBuffer();
         try {
@@ -58,9 +62,13 @@ public class database {
         return result.toString();
     }
 
-    public static String getMethod(int id) {
+    public static String getMethod(int type, int id) {
 
-        String url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent/" + id;
+        String url = "";
+        if(type == define.DTO.TimeEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent/" + id;
+        else if(type == define.DTO.PeriodEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent/" + id;
 
         StringBuffer result = new StringBuffer();
         try {
