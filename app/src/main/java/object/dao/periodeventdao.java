@@ -3,6 +3,7 @@ package object.dao;
 import object.database;
 import object.define;
 import object.dto.periodeventdto;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -67,5 +68,21 @@ public class periodeventdao {
             e.printStackTrace();
         }
         return listresultdto;
+    }
+
+    public static int insert(periodeventdto dto)
+    {
+        List nameValuePair = new ArrayList(7);
+        nameValuePair.add(new BasicNameValuePair("PE-TimeStart",dto.timestart.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-TimeEnd",dto.timeend.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-DateStart",dto.timestart.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-DateEnd",dto.timeend.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-DaySelect",dto.dayselect.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-Note",dto.note.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-UserID",Integer.toString(dto.userid)));
+
+        int newid = database.postMethod_insert(define.DTO.PeriodEvent, nameValuePair);
+
+        return newid;
     }
 }

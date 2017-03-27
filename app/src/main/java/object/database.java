@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import object.dto.periodeventdto;
 import object.dto.timeeventdto;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -95,25 +96,19 @@ public class database {
         return result.toString();
     }
 
-    public static String postMethod_insert(timeeventdto dto)
+    public static int postMethod_insert(int type, List nameValuePair)
     {
-        //tạo URL dẫn tới Database
-        String url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
+        String url = "";
+        if(type == define.DTO.TimeEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
+        else if(type == define.DTO.PeriodEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent";
 
         //khởi tạo giao thức http phái Client
         HttpClient httpClient = new DefaultHttpClient();
 
         //Giao thức Post bằng việc lấy URL để nhận Request
         HttpPost httpPost = new HttpPost(url);
-
-        //Các tham số cần truyền
-        List nameValuePair = new ArrayList(5);
-        nameValuePair.add(new BasicNameValuePair("TE-TimeStart",dto.timestart.toString()));
-        nameValuePair.add(new BasicNameValuePair("TE-TimeEnd",dto.timeend.toString()));
-        nameValuePair.add(new BasicNameValuePair("TE-DaySelect",dto.dayselect.toString()));
-        nameValuePair.add(new BasicNameValuePair("TE-Note",dto.note.toString()));
-        nameValuePair.add(new BasicNameValuePair("TE-UserID",Integer.toString(dto.userid)));
-        nameValuePair.add(new BasicNameValuePair("TE-PE_ID",Integer.toString(dto.pe_id)));
 
         //Encoding dữ liệu khi POST
         try {
@@ -132,13 +127,6 @@ public class database {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return Integer.parseInt(result);
     }
-     /*
-    URL weburl = new URL(url);
-    URLConnection urlConnection = weburl.openConnection();
-
-    BufferedReader rd = new BufferedReader(
-            new InputStreamReader(urlConnection.getInputStream()));
-    */
 }
