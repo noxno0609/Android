@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import object.dto.timeeventdto;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -94,7 +95,7 @@ public class database {
         return result.toString();
     }
 
-    public static String postMethod_insert(EditText a, EditText b, EditText c, EditText d)
+    public static String postMethod_insert(timeeventdto dto)
     {
         //tạo URL dẫn tới Database
         String url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
@@ -106,11 +107,13 @@ public class database {
         HttpPost httpPost = new HttpPost(url);
 
         //Các tham số cần truyền
-        List nameValuePair = new ArrayList(4);
-        nameValuePair.add(new BasicNameValuePair("timestart",a.getText().toString()));
-        nameValuePair.add(new BasicNameValuePair("timeend",b.getText().toString()));
-        nameValuePair.add(new BasicNameValuePair("dayselect",c.getText().toString()));
-        nameValuePair.add(new BasicNameValuePair("note",d.getText().toString()));
+        List nameValuePair = new ArrayList(5);
+        nameValuePair.add(new BasicNameValuePair("TE-TimeStart",dto.timestart.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-TimeEnd",dto.timeend.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-DaySelect",dto.dayselect.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-Note",dto.note.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-UserID",Integer.toString(dto.userid)));
+        nameValuePair.add(new BasicNameValuePair("TE-PE_ID",Integer.toString(dto.pe_id)));
 
         //Encoding dữ liệu khi POST
         try {
