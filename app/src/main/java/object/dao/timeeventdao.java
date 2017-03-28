@@ -3,6 +3,7 @@ package object.dao;
 import android.util.Log;
 import android.widget.Toast;
 import object.database;
+import object.define;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -30,7 +31,7 @@ public class timeeventdao {
     public static String test()
     {
         // Create a new HttpClient and Post Header
-        String result = database.getMethod();
+        String result = database.getMethod(define.DTO.TimeEvent);
         return result;
     }
 }
