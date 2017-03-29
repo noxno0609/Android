@@ -11,17 +11,25 @@ import android.widget.TextView;
 
 public class ShowActivity extends AppCompatActivity {
     private Button btLichtrinh;
+    private Button btMoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-
+        btMoc=(Button) findViewById(R.id.btMoc);
         btLichtrinh=(Button) findViewById(R.id.btLichtrinh);
         btLichtrinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ShowActivity.this, LichtrinhActivity.class);
+                startActivity(intent);
+            }
+        });
+        btMoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowActivity.this,Moc.class);
                 startActivity(intent);
             }
         });

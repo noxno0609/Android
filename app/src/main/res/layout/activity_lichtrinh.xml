@@ -7,10 +7,10 @@
     tools:context="com.example.thienpham.time_remider.LichtrinhActivity">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -39,19 +39,20 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="72dp">
 
-            <EditText
-                android:id="@+id/etDaystart"
+            <Button
+                android:id="@+id/btDaystart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+
                 android:hint="Ngày bắt đầu"
                 android:inputType="date"
                 android:textAlignment="center"
                 android:textColor="#2962ff" />
 
-            <EditText
-                android:id="@+id/etDayend"
+            <Button
+                android:id="@+id/btDayend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -77,8 +78,8 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="115dp">
 
-            <EditText
-                android:id="@+id/etTimestart"
+            <Button
+                android:id="@+id/btTimestart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -88,8 +89,8 @@
                 android:textAlignment="center"
                 android:textColor="#2962ff" />
 
-            <EditText
-                android:id="@+id/etTimeend"
+            <Button
+                android:id="@+id/btTimeend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -176,10 +177,11 @@
             android:ems="10"
             android:gravity="center"
             android:hint="Tên lịch trình"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColorLink="@color/colorPrimary" />
 
-        <RadioButton
-            android:id="@+id/rbAll"
+        <CheckBox
+            android:id="@+id/cbMoingay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linearLayout4"
@@ -192,11 +194,36 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="150dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="19dp"
-            android:layout_below="@+id/rbAll"
-            android:layout_centerHorizontal="true" />
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:entries="@array/color"
+            android:layout_below="@+id/cbMoingay"
+            android:layout_alignLeft="@+id/cbMoingay"
+            android:layout_alignStart="@+id/cbMoingay" />
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:ems="10"
+                android:layout_below="@+id/spinner" android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp" android:id="@+id/editText2"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+            <Button
+                    android:text="Thêm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/btAdd" android:layout_weight="1"/>
+            <Button
+                    android:text="Hủy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/btCancel" android:layout_weight="1"/>
+        </LinearLayout>
 
 
     </RelativeLayout>

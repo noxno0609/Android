@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Time Reminder</string>
+    <string-array name="color">
+        <item>Đỏ</item>
+        <item>Xanh</item>
+        <item>Vàng</item>
+    </string-array>
 </resources>
