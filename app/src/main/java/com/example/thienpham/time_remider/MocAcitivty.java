@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class Moc extends AppCompatActivity {
+public class MocAcitivty extends AppCompatActivity {
     Button btTimestart,btTimeend,btDayselect,btCancel;
     Calendar cal = Calendar.getInstance();
     @Override
@@ -45,9 +45,9 @@ public class Moc extends AppCompatActivity {
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Moc.this,ShowActivity.class);
+                Intent intent = new Intent(MocAcitivty.this,ShowActivity.class);
                 startActivity(intent);
-                Toast.makeText(Moc.this, "Bạn đã hủy Mốc", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MocAcitivty.this, "Bạn đã hủy Mốc", Toast.LENGTH_SHORT).show();
             }
         });
     }

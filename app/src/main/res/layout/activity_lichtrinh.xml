@@ -2,8 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="com.example.thienpham.time_remider.LichtrinhActivity">
 
     <RelativeLayout
@@ -180,27 +180,6 @@
             android:inputType="textPersonName"
             android:textColorLink="@color/colorPrimary" />
 
-        <CheckBox
-            android:id="@+id/cbMoingay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="37dp"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Mỗi ngày" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="12dp"
-            android:entries="@array/color"
-            android:layout_below="@+id/cbMoingay"
-            android:layout_alignLeft="@+id/cbMoingay"
-            android:layout_alignStart="@+id/cbMoingay" />
         <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
@@ -224,6 +203,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/btCancel" android:layout_weight="1"/>
         </LinearLayout>
+        <CheckBox
+                android:id="@+id/cbMoingay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Mỗi ngày" android:layout_below="@+id/linearLayout3"
+                android:layout_alignLeft="@+id/etNameLT" android:layout_alignStart="@+id/etNameLT"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:entries="@array/color"
+            android:layout_alignBottom="@+id/cbMoingay" android:layout_toRightOf="@+id/cbMoingay"
+            android:layout_toEndOf="@+id/cbMoingay" android:layout_marginLeft="28dp" android:layout_marginStart="28dp"/>
 
 
     </RelativeLayout>
