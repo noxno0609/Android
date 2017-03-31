@@ -4,6 +4,9 @@ import android.util.Log;
 import android.widget.Toast;
 import object.database;
 import object.define;
+import object.dto.timeeventdto;
+import object.format;
+import object.util;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -15,23 +18,105 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by BenX on 18/03/2017.
  */
 public class timeeventdao {
+    public static timeeventdto get(int id) {
+        String jsonstr = database.getMethod(define.DTO.TimeEvent, id);
+        timeeventdto resutldto = new timeeventdto();
 
-    public static String test()
+        try {
+            JSONObject json = new JSONObject(jsonstr);
+            resutldto.id = json.getInt("id");
+            resutldto.userid = json.getInt("id");
+            resutldto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getString("timestart"));
+            resutldto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getString("timeend"));
+            resutldto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("dayselect"));
+            resutldto.note = json.getString("note");
+            resutldto.pe_id = json.getInt("pe_id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resutldto;
+    }
+
+    public static List<timeeventdto> getall() {
+        String jsonstr = database.getMethod(define.DTO.TimeEvent);
+        List<timeeventdto> listresutldto = new ArrayList<timeeventdto>();
+
+        try {
+            JSONArray json = new JSONArray(jsonstr);
+            for (int i = 0; i < json.length(); i++) {
+                timeeventdto dto = new timeeventdto();
+                dto.id = json.getJSONObject(i).getInt("id");
+                dto.userid = json.getJSONObject(i).getInt("userid");
+                dto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("timestart"));
+                dto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("timeend"));
+                dto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("dayselect"));
+                dto.pe_id = json.getJSONObject(i).getInt("pe_id");
+                listresutldto.add(dto);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return listresutldto;
+    }
+
+    public static int insert (timeeventdto dto)
     {
-        // Create a new HttpClient and Post Header
-        String result = database.getMethod(define.DTO.TimeEvent);
-        return result;
+        List nameValuePair = new ArrayList(6);
+        nameValuePair.add(new BasicNameValuePair("TE-TimeStart", format.addSQLTime(dto.timestart)));
+        nameValuePair.add(new BasicNameValuePair("TE-TimeEnd", format.addSQLTime(dto.timeend)));
+        nameValuePair.add(new BasicNameValuePair("TE-DaySelect", dto.dayselect.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-Note", dto.note.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-UserID", Integer.toString(dto.userid)));
+        nameValuePair.add(new BasicNameValuePair("TE-PeID", Integer.toString(dto.pe_id)));
+
+        int newid = database.postMethod(define.DTO.TimeEvent, nameValuePair);
+        if (newid > 0)
+             dto.id = newid;
+
+        return newid;
+    }
+
+    public static  boolean update(timeeventdto dto)
+    {
+        List nameValuePair = new ArrayList(6);
+        nameValuePair.add(new BasicNameValuePair("TE-TimeStart", format.addSQLTime(dto.timestart)));
+        nameValuePair.add(new BasicNameValuePair("TE-TimeEnd", format.addSQLTime(dto.timeend)));
+        nameValuePair.add(new BasicNameValuePair("TE-DaySelect", dto.dayselect.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-Note", dto.note.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-UserID", Integer.toString(dto.userid)));
+        nameValuePair.add(new BasicNameValuePair("TE-PeID", Integer.toString(dto.pe_id)));
+
+        int result = database.postMethod(define.DTO.TimeEvent, dto.id, nameValuePair,"PUT");
+
+        return (result == 1) ? true : false;
+    }
+
+    public static boolean delete(timeeventdto dto)
+    {
+        int result = database.postMethod(define.DTO.TimeEvent, dto.id, new ArrayList(1), "DELETE");
+        util.deleteDto(dto);
+        return (result == 1) ? true : false;
     }
 }
