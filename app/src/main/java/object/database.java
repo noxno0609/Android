@@ -7,6 +7,7 @@ import android.widget.TextView;
 import object.dto.periodeventdto;
 import object.dto.timeeventdto;
 import object.dto.userdto;
+import org.apache.commons.httpclient.util.HttpURLConnection;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -22,9 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +37,34 @@ public class database {
     public static final String connString = connIP + ":" + connPort;
     public static userdto sessionuser = null;
 
-    public static boolean checkHostConnection()  {
+    public static boolean checkServerAvailable() {
+        Socket s = null;
         try {
-            if (InetAddress.getByAddress(connString.getBytes()).isReachable(1000)==true)
-            {
-                return true;
-            }
+            s = new Socket(connIP, Integer.parseInt(connPort));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        boolean available = true;
+        try {
+            if (s.isConnected())
+            { s.close();
+            }
+        }
+        catch (UnknownHostException e)
+        { // unknown host
+            available = false;
+            s = null;
+        }
+        catch (IOException e) { // io exception, service probably not running
+            available = false;
+            s = null;
+        }
+        catch (NullPointerException e) {
+            available = false;
+            s=null;
+        }
+
+        return available;
     }
 
     public static String getMethod(int type) {

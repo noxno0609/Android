@@ -42,23 +42,20 @@ public class MainActivity extends AppCompatActivity {
         btDangkiMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(database.checkHostConnection() == true) {
                     Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                     startActivity(intent);
-                }
-                else
-                    Toast.makeText(MainActivity.this, "Không thể kết nối tới server!", Toast.LENGTH_SHORT).show();
+
             }
         });
         btDangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        new LoadData().execute();
-                    }
-                });
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            new LoadData().execute();
+                        }
+                    });
             }
         });
     }
@@ -75,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
+            if(database.checkServerAvailable() != true)
+            {
+                return "Không thể kết nối tới server!";
+            }
 
             EditText etuser = (EditText) findViewById(R.id.etUserLogin);
             EditText etpassword = (EditText) findViewById(R.id.etPassLogin);
