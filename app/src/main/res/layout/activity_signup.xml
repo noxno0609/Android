@@ -7,8 +7,8 @@
     tools:context="com.example.thienpham.time_remider.SignupActivity">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         tools:layout_constraintTop_creator="1" tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1" app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" tools:layout_constraintLeft_creator="1"

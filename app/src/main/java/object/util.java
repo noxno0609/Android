@@ -1,5 +1,8 @@
 package object;
 
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import object.dao.timeeventdao;
 import object.dto.periodeventdto;
 import object.dto.timeeventdto;
@@ -90,4 +93,30 @@ public class util {
         // convert calendar to date
         return c.getTime();
     }
+
+    public static String numberDay(int i)
+    {
+        switch(i)
+        {
+            case 0: return "Hai";
+            case 1: return "Ba";
+            case 2: return "Tư";
+            case 3: return "Năm";
+            case 4: return "Sáu";
+            case 5: return "Bảy";
+            case 6: return "Chủ Nhật";
+        }
+        return "";
+    }
+
+    public static int dpToPx(int dp, DisplayMetrics metrics)
+    {
+        return Math.round(dp * (metrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public static int pxToDp(int px)
+    {
+        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+    }
+
 }
