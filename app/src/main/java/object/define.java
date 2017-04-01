@@ -8,6 +8,7 @@ public class define {
     {
         public static int TimeEvent = 1;
         public static int PeriodEvent = 2;
+        public static int User = 3;
     }
 
     public static final int YEAR = 1;

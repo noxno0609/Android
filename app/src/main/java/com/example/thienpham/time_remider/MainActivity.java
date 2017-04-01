@@ -14,8 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import object.dao.periodeventdao;
 import object.dao.timeeventdao;
+import object.dao.userdao;
+import object.database;
 import object.dto.periodeventdto;
 import object.dto.timeeventdto;
+import object.dto.userdto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,13 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Anh xa actitivy_main.xml
         btDangnhap=(Button) findViewById(R.id.btDangnhap);
-        btDangkiMain=(Button) findViewById(R.id.btDangkiMain) ;
+        btDangkiMain=(Button) findViewById(R.id.btDangkiMain);
 
         btDangkiMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WeekViewAcitivity.class);
-                startActivity(intent);
+                if(database.checkHostConnection() == true) {
+                    Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(MainActivity.this, "Không thể kết nối tới server!", Toast.LENGTH_SHORT).show();
             }
         });
         btDangnhap.setOnClickListener(new View.OnClickListener() {
@@ -52,54 +59,48 @@ public class MainActivity extends AppCompatActivity {
                         new LoadData().execute();
                     }
                 });
-
-                Intent intent = new Intent(MainActivity.this, ShowActivity.class);
-                startActivity(intent);
-                Toast.makeText(MainActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     class LoadData extends AsyncTask<String, String, String>{
         private ProgressDialog progress = new ProgressDialog(MainActivity.this);
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             progress.setTitle(("Loading"));
-            progress.setMessage("Lấy dữ liệu...");
+            progress.setMessage("Kiểm tra tài khoản...");
             progress.show();
         }
 
         @Override
         protected String doInBackground(String... params) {
-            periodeventdto dto = new periodeventdto();
-            dto.dateend = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            try {
-                dto.datestart = sdf.parse("21/03/2017");
-            } catch (ParseException e) {
-                e.printStackTrace();
+
+            EditText etuser = (EditText) findViewById(R.id.etUserLogin);
+            EditText etpassword = (EditText) findViewById(R.id.etPassLogin);
+
+            List<userdto> listdto = userdao.getall();
+            for(userdto dto : listdto)
+            {
+                if(dto.Name.equals(etuser.getText().toString()) && dto.Password.equals(etpassword.getText().toString()))
+                {
+                    database.sessionuser = dto;
+                    return "Đăng nhập thành công";
+                }
             }
-            dto.timestart = new Date();
-            dto.timeend = new Date();
-            dto.userid = 99;
-            dto.dayselect = "1010001";
-            dto.note = "Ahihi";
-            int newid = periodeventdao.insert(dto);
-
-            dto.note = "Edited";
-            dto.dayselect = "1100000";
-            boolean result = periodeventdao.update(dto);
-
-            boolean result2 = periodeventdao.delete(dto);
-
-            progress.dismiss();
-
-            return null;
+            return "Sai tên đăng nhập hoặc mật khẩu";
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            progress.dismiss();
+            Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+            if(database.sessionuser != null)
+            {
+                Intent intent = new Intent(MainActivity.this, WeekViewAcitivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

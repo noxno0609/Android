@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import object.dto.periodeventdto;
 import object.dto.timeeventdto;
+import object.dto.userdto;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -21,6 +22,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +33,32 @@ import java.util.List;
  */
 public class database {
 
-    public static final String connIP = "192.168.1.40:85";
+    public static final String connIP = "192.168.1.40";
+    public static final String connPort = "85";
+    public static final String connString = connIP + ":" + connPort;
+    public static userdto sessionuser = null;
+
+    public static boolean checkHostConnection()  {
+        try {
+            if (InetAddress.getByAddress(connString.getBytes()).isReachable(1000)==true)
+            {
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public static String getMethod(int type) {
 
         String url = "";
         if(type == define.DTO.TimeEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
+            url = "http://" + database.connString + "/TimeReminderWS/public/TimeEvent";
         else if(type == define.DTO.PeriodEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent";
+            url = "http://" + database.connString + "/TimeReminderWS/public/PeriodEvent";
+        else if(type == define.DTO.User)
+            url = "http://" + database.connString + "/TimeReminderWS/public/User";
 
         StringBuffer result = new StringBuffer();
         try {
@@ -68,9 +89,11 @@ public class database {
 
         String url = "";
         if(type == define.DTO.TimeEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent/" + id;
+            url = "http://" + database.connString + "/TimeReminderWS/public/TimeEvent/" + id;
         else if(type == define.DTO.PeriodEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent/" + id;
+            url = "http://" + database.connString + "/TimeReminderWS/public/PeriodEvent/" + id;
+        else if(type == define.DTO.User)
+            url = "http://" + database.connString + "/TimeReminderWS/public/User";
 
         StringBuffer result = new StringBuffer();
         try {
@@ -100,9 +123,11 @@ public class database {
     {
         String url = "";
         if(type == define.DTO.TimeEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent";
+            url = "http://" + database.connString + "/TimeReminderWS/public/TimeEvent";
         else if(type == define.DTO.PeriodEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent";
+            url = "http://" + database.connString + "/TimeReminderWS/public/PeriodEvent";
+        else if(type == define.DTO.User)
+            url = "http://" + database.connString + "/TimeReminderWS/public/User";
 
         //khởi tạo giao thức http phái Client
         HttpClient httpClient = new DefaultHttpClient();
@@ -134,9 +159,11 @@ public class database {
     {
         String url = "";
         if(type == define.DTO.TimeEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent/" + id;
+            url = "http://" + database.connString + "/TimeReminderWS/public/TimeEvent/" + id;
         else if(type == define.DTO.PeriodEvent)
-            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent/" + id;
+            url = "http://" + database.connString + "/TimeReminderWS/public/PeriodEvent/" + id;
+        else if(type == define.DTO.User)
+            url = "http://" + database.connString + "/TimeReminderWS/public/User/" + id;
 
         //khởi tạo giao thức http phái Client
         HttpClient httpClient = new DefaultHttpClient();
