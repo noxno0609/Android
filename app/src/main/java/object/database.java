@@ -38,33 +38,38 @@ public class database {
     public static userdto sessionuser = null;
 
     public static boolean checkServerAvailable() {
-        Socket s = null;
+        Socket s = new Socket();
+
         try {
-            s = new Socket(connIP, Integer.parseInt(connPort));
+            s.connect(new InetSocketAddress(connIP, Integer.parseInt(connPort)), 2000);
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
-        boolean available = true;
+
         try {
             if (s.isConnected())
             { s.close();
             }
+            else
+            {
+                s=null;
+                return false;
+            }
         }
         catch (UnknownHostException e)
         { // unknown host
-            available = false;
             s = null;
+            return false;
         }
         catch (IOException e) { // io exception, service probably not running
-            available = false;
             s = null;
+            return false;
         }
         catch (NullPointerException e) {
-            available = false;
-            s=null;
+            s = null;
+            return false;
         }
-
-        return available;
+        return true;
     }
 
     public static String getMethod(int type) {
