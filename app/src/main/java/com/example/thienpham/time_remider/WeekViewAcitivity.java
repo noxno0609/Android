@@ -1,6 +1,7 @@
 package com.example.thienpham.time_remider;
 
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,18 @@ public class WeekViewAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_view_acitivity);
+
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        int screenWidth = size.x;
+        int screenHeight = size.y;
+
+        for(int i=0;i<7;i++)
+        {
+            TextView dayView = new TextView(this);
+            
+            dayView.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/7, 40));//Thay doi size
+        }
 
         GridLayout weekview = (GridLayout) findViewById(R.id.weekView);
         weekview.removeAllViews();
@@ -46,14 +59,16 @@ public class WeekViewAcitivity extends AppCompatActivity {
                 gd.setCornerRadius(5);
                 gd.setStroke(1, 0xFF000000);
 
-                Button test = new Button(this);
-                test.setLayoutParams(new LinearLayout.LayoutParams(50,layoutparam.height));//Thay doi size
-                test.setBackground(gd);
-                abc.addView(test);
+                Button bttest = new Button(this);
+                bttest.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/7,layoutparam.height));//Thay doi size
+                bttest.setBackground(gd);
+                abc.addView(bttest);
                 abc.setLayoutParams(layoutparam);
                 weekview.addView(abc, gridParam);
+
             }
         }
+
         /*
         TextView test = new TextView(this);
         test.setText("ABCDXYZ");

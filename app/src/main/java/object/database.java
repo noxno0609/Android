@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class database {
 
-    public static final String connIP = "192.168.1.40";
+    public static final String connIP = "192.168.1.40:85";
 
     public static String getMethod(int type) {
 
@@ -96,7 +96,7 @@ public class database {
         return result.toString();
     }
 
-    public static int postMethod_insert(int type, List nameValuePair)
+    public static int postMethod(int type, List nameValuePair)
     {
         String url = "";
         if(type == define.DTO.TimeEvent)
@@ -125,7 +125,42 @@ public class database {
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            return 0;
+        }
+        return Integer.parseInt(result);
+    }
+
+    public static int postMethod(int type, int id, List nameValuePair, String posttype)
+    {
+        String url = "";
+        if(type == define.DTO.TimeEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/TimeEvent/" + id;
+        else if(type == define.DTO.PeriodEvent)
+            url = "http://" + database.connIP + "/TimeReminderWS/public/PeriodEvent/" + id;
+
+        //khởi tạo giao thức http phái Client
+        HttpClient httpClient = new DefaultHttpClient();
+
+        //Giao thức Post bằng việc lấy URL để nhận Request
+        HttpPost httpPost = new HttpPost(url);
+        nameValuePair.add(new BasicNameValuePair("_method", posttype));
+
+        //Encoding dữ liệu khi POST
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }
+
+        String result = "";
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            result = EntityUtils.toString(entity);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            return 0;
         }
         return Integer.parseInt(result);
     }

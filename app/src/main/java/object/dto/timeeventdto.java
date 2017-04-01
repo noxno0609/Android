@@ -7,6 +7,7 @@ import java.util.Date;
  * Created by BenX on 18/03/2017.
  */
 public class timeeventdto {
+
     public int id;
     public int userid;
     public Date timestart;

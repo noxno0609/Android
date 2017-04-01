@@ -5,4 +5,37 @@
         <item>Xanh</item>
         <item>Vàng</item>
     </string-array>
+    <string name="thu_2">T2</string>
+    <string name="thu_3">T3</string>
+    <string name="thu_4">T4</string>
+    <string name="thu_5">T5</string>
+    <string name="thu_6">T6</string>
+    <string name="thu_7">T7</string>
+    <string name="chu_nhat">CN</string>
+
+    <string name="time_12am">0 am</string>
+    <string name="time_1am">1</string>
+    <string name="time_2am">2</string>
+    <string name="time_3am">3</string>
+    <string name="time_4am">4</string>
+    <string name="time_5am">5</string>
+    <string name="time_6am">6</string>
+    <string name="time_7am">7</string>
+    <string name="time_8am">8</string>
+    <string name="time_9am">9</string>
+    <string name="time_10am">10</string>
+    <string name="time_11am">11</string>
+    <string name="time_12pm">12 pm</string>
+    <string name="time_13pm">13</string>
+    <string name="time_14pm">14</string>
+    <string name="time_15pm">15</string>
+    <string name="time_16pm">16</string>
+    <string name="time_17pm">17</string>
+    <string name="time_18pm">18</string>
+    <string name="time_19pm">19</string>
+    <string name="time_20pm">20</string>
+    <string name="time_21pm">21</string>
+    <string name="time_22pm">22</string>
+    <string name="time_23pm">23</string>
+    <string name="time_24pm">24</string>
 </resources>
