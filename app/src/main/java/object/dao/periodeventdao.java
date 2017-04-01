@@ -3,6 +3,7 @@ package object.dao;
 import object.database;
 import object.define;
 import object.dto.periodeventdto;
+import object.dto.timeeventdto;
 import object.format;
 import object.util;
 import org.apache.http.message.BasicNameValuePair;
@@ -13,6 +14,8 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -86,6 +89,19 @@ public class periodeventdao {
         if(newid > 0)
             dto.id = newid;
 
+        List<Date> listsdate = util.getSelectDate(dto);
+        for(Date sdate : listsdate)
+        {
+            timeeventdto ndto = new timeeventdto();
+            ndto.note = dto.note;
+            ndto.timestart = dto.timestart;
+            ndto.timeend = dto.timeend;
+            ndto.userid = dto.userid;
+            ndto.pe_id = dto.id;
+            ndto.dayselect = sdate;
+            timeeventdao.insert(ndto);
+        }
+
         return newid;
     }
 
@@ -102,12 +118,59 @@ public class periodeventdao {
 
         int result = database.postMethod(define.DTO.PeriodEvent, dto.id, nameValuePair, "PUT");
 
+        updatetimeevent(dto);
         return (result == 1) ? true : false;
+    }
+
+    public static void updatetimeevent(periodeventdto dto)
+    {
+        List<timeeventdto> listdto = timeeventdao.getall();
+        List<Date> listsdate = util.getSelectDate(dto);
+        List<Date> listinsdate = new ArrayList<>();
+
+        for (timeeventdto tdto : listdto)
+        {
+            if(tdto.pe_id == dto.id)
+            {
+                if(listsdate.contains(tdto.dayselect))
+                {
+                    tdto.timestart = dto.timestart;
+                    tdto.timeend = dto.timeend;
+                    tdto.note = dto.note;
+                    timeeventdao.update(tdto);
+                    listinsdate.add(tdto.dayselect);
+                }
+                else timeeventdao.delete(tdto);
+            }
+        }
+
+        for(Date sdate : listsdate)
+        {
+            if(!listinsdate.contains(sdate))
+            {
+                timeeventdto ndto = new timeeventdto();
+                ndto.note = dto.note;
+                ndto.timestart = dto.timestart;
+                ndto.timeend = dto.timeend;
+                ndto.userid = dto.userid;
+                ndto.pe_id = dto.id;
+                ndto.dayselect = sdate;
+                timeeventdao.insert(ndto);
+            }
+        }
     }
 
     public static boolean delete(periodeventdto dto)
     {
         int result = database.postMethod(define.DTO.PeriodEvent, dto.id, new ArrayList(1), "DELETE");
+
+        List<timeeventdto> listdto = timeeventdao.getall();
+        for(timeeventdto tdto : listdto)
+        {
+            if(tdto.pe_id == dto.id)
+                timeeventdao.delete(tdto);
+        }
+
         util.deleteDto(dto);
         return (result == 1) ? true : false;
     }

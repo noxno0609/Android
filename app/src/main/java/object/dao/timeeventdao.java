@@ -43,12 +43,12 @@ public class timeeventdao {
         try {
             JSONObject json = new JSONObject(jsonstr);
             resutldto.id = json.getInt("id");
-            resutldto.userid = json.getInt("id");
-            resutldto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getString("timestart"));
-            resutldto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getString("timeend"));
-            resutldto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("dayselect"));
-            resutldto.note = json.getString("note");
-            resutldto.pe_id = json.getInt("pe_id");
+            resutldto.userid = json.getInt("UserID");
+            resutldto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getString("TimeStart"));
+            resutldto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getString("TimeEnd"));
+            resutldto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("DaySelect"));
+            resutldto.note = json.getString("Note");
+            resutldto.pe_id = json.getInt("PE_ID");
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -66,11 +66,11 @@ public class timeeventdao {
             for (int i = 0; i < json.length(); i++) {
                 timeeventdto dto = new timeeventdto();
                 dto.id = json.getJSONObject(i).getInt("id");
-                dto.userid = json.getJSONObject(i).getInt("userid");
-                dto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("timestart"));
-                dto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("timeend"));
-                dto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("dayselect"));
-                dto.pe_id = json.getJSONObject(i).getInt("pe_id");
+                dto.userid = json.getJSONObject(i).getInt("UserID");
+                dto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeStart"));
+                dto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeEnd"));
+                dto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("DaySelect"));
+                dto.pe_id = json.getJSONObject(i).getInt("PE_ID");
                 listresutldto.add(dto);
             }
         } catch (ParseException e) {
@@ -86,10 +86,10 @@ public class timeeventdao {
         List nameValuePair = new ArrayList(6);
         nameValuePair.add(new BasicNameValuePair("TE-TimeStart", format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("TE-TimeEnd", format.addSQLTime(dto.timeend)));
-        nameValuePair.add(new BasicNameValuePair("TE-DaySelect", dto.dayselect.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-DaySelect", format.addSQLDate(dto.dayselect)));
         nameValuePair.add(new BasicNameValuePair("TE-Note", dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("TE-UserID", Integer.toString(dto.userid)));
-        nameValuePair.add(new BasicNameValuePair("TE-PeID", Integer.toString(dto.pe_id)));
+        nameValuePair.add(new BasicNameValuePair("TE-PE_ID", Integer.toString(dto.pe_id)));
 
         int newid = database.postMethod(define.DTO.TimeEvent, nameValuePair);
         if (newid > 0)
@@ -103,10 +103,10 @@ public class timeeventdao {
         List nameValuePair = new ArrayList(6);
         nameValuePair.add(new BasicNameValuePair("TE-TimeStart", format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("TE-TimeEnd", format.addSQLTime(dto.timeend)));
-        nameValuePair.add(new BasicNameValuePair("TE-DaySelect", dto.dayselect.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-DaySelect", format.addSQLDate(dto.dayselect)));
         nameValuePair.add(new BasicNameValuePair("TE-Note", dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("TE-UserID", Integer.toString(dto.userid)));
-        nameValuePair.add(new BasicNameValuePair("TE-PeID", Integer.toString(dto.pe_id)));
+        nameValuePair.add(new BasicNameValuePair("TE-PE_ID", Integer.toString(dto.pe_id)));
 
         int result = database.postMethod(define.DTO.TimeEvent, dto.id, nameValuePair,"PUT");
 

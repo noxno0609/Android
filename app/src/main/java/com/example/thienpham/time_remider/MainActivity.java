@@ -13,8 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import object.dao.periodeventdao;
+import object.dao.timeeventdao;
 import object.dto.periodeventdto;
+import object.dto.timeeventdto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -68,17 +72,22 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             periodeventdto dto = new periodeventdto();
-
-            dto.datestart = new Date();
             dto.dateend = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                dto.datestart = sdf.parse("21/03/2017");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             dto.timestart = new Date();
             dto.timeend = new Date();
             dto.userid = 99;
-            dto.dayselect = "0000000";
+            dto.dayselect = "1010001";
             dto.note = "Ahihi";
             int newid = periodeventdao.insert(dto);
 
             dto.note = "Edited";
+            dto.dayselect = "1100000";
             boolean result = periodeventdao.update(dto);
 
             boolean result2 = periodeventdao.delete(dto);
