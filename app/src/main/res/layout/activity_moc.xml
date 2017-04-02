@@ -22,39 +22,10 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" android:layout_below="@+id/textView5" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" android:id="@+id/linearLayout6">
-        <Button
-                android:hint="Giờ bắt đầu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btTimestart" android:layout_weight="1"/>
-        <Button
-                android:hint="Giờ kết thúc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btTimeend" android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout6" android:layout_alignParentLeft="true"
+            android:layout_marginTop="45dp" android:layout_below="@+id/textView5" android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
-        <Button
-                android:hint="Ngày chọn"
-                android:layout_width="fill_parent"
-                android:layout_marginLeft="80dp"
-                android:layout_marginRight="80dp"
-                android:layout_height="wrap_content" android:id="@+id/btDayselect" android:layout_weight="1"/>
 
     </LinearLayout>
-    <Spinner
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:id="@+id/spinner"
-            android:layout_marginLeft="120dp"
-            android:layout_marginRight="120dp"
-            android:layout_marginTop="150dp"
-            android:entries="@array/color"
-            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
     <EditText
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -63,22 +34,41 @@
             android:gravity="center"
             android:ems="10"
             android:id="@+id/editText"
-            android:layout_below="@+id/spinner" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" android:layout_marginTop="21dp"/>
+            android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+    />
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
-            android:layout_marginBottom="10dp">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_below="@+id/textView5" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:layout_marginTop="27dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <Button
+                    android:hint="Giờ bắt đầu"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" android:id="@+id/btTimestart" android:layout_weight="1"/>
+            <Button
+                    android:hint="Giờ kết thúc"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" android:id="@+id/btTimeend" android:layout_weight="1"/>
+        </LinearLayout>
         <Button
-                android:text="Thêm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btAdd" android:layout_weight="1"/>
-        <Button
-                android:text="Hủy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btCancel" android:layout_weight="1"/>
+                android:hint="Ngày chọn"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_height="100dp" android:id="@+id/btDayselect" android:layout_marginTop="10dp"/>
     </LinearLayout>
+    <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/spinner"
+            android:entries="@array/color"
+            android:layout_above="@+id/editText" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:layout_marginBottom="15dp"/>
 
 </RelativeLayout>
