@@ -9,35 +9,58 @@
     <!-- Lịch -->
 
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <GridLayout
-                android:id="@+id/weekView"
-                android:paddingTop="60dp"
-                tools:layout_constraintTop_creator="1" tools:layout_constraintRight_creator="1"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:layout_constraintLeft_creator="1" app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_constraintBottom_creator="1" app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="1.0" android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-        </GridLayout>
-    </ScrollView>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="40dp"
-            tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp"
-            android:id="@+id/timeviewlayout" android:layout_height="60dp">
-    </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
-            android:layout_height="60dp"
-            android:layout_marginLeft="40dp"
-            tools:layout_editor_absoluteY="8dp"
-            tools:layout_editor_absoluteX="40dp" android:id="@+id/weekdaylayout" android:layout_width="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+        <Button
+                android:text="Đăng Xuất"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/btLogOut" android:layout_weight="1"/>
+        <Button
+                android:text="Lịch Trình"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/btLichTrinh" android:layout_weight="1"/>
+        <Button
+                android:text="Thêm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/btAddTE" android:layout_weight="1"/>
     </LinearLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_height="match_parent" android:id="@+id/boneweekview">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="60dp"
+                android:layout_marginLeft="40dp"
+                tools:layout_editor_absoluteY="8dp"
+                tools:layout_editor_absoluteX="40dp" android:id="@+id/weekdaylayout" android:layout_width="fill_parent">
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="40dp"
+                tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp"
+                android:id="@+id/timeviewlayout" android:layout_height="60dp">
+        </LinearLayout>
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_marginTop="60dp"
+                android:layout_height="match_parent">
+            <GridLayout
+                    android:id="@+id/weekView"
+                    tools:layout_constraintTop_creator="1" tools:layout_constraintRight_creator="1"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:layout_constraintLeft_creator="1" app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_constraintBottom_creator="1" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="1.0" android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+            </GridLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 
 </RelativeLayout>

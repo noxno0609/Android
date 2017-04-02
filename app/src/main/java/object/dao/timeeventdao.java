@@ -70,6 +70,7 @@ public class timeeventdao {
                 dto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeStart"));
                 dto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeEnd"));
                 dto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("DaySelect"));
+                dto.note = json.getJSONObject(i).getString("Note");
                 dto.pe_id = json.getJSONObject(i).getInt("PE_ID");
                 listresutldto.add(dto);
             }
