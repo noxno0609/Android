@@ -39,6 +39,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
     public static int screenWidth, screenHeight, viewWidth;
     public static Date nowDate = new Date();
     public static Button btAddTE,btTimestart,btTimeend,btDayselect;
+    public static Button btLichTrinh;
     Calendar cal = Calendar.getInstance();
 
     @Override
@@ -50,6 +51,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
+
         btAddTE = (Button) findViewById(R.id.btAddTE);
         btAddTE.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,15 +60,15 @@ public class WeekViewAcitivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*btTimestart  = (Button) findViewById(R.id.btTimestart);
-        btTimeend = (Button) findViewById(R.id.btTimeend);
-        btDayselect=(Button) findViewById(R.id.btDayselect);
-        btAddTE.setOnClickListener(new View.OnClickListener() {
+
+        btLichTrinh = (Button) findViewById(R.id.btMainLichTrinh);
+        btLichTrinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogThemmoc();
+                Intent intent = new Intent(WeekViewAcitivity.this, MainLichTrinhActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
 
         Button logout = (Button) findViewById(R.id.btLogOut);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +135,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
                 for(int i=0;i<7;i++)
                 {
                     TextView dayView = new TextView(WeekViewAcitivity.this);
-                    dayView.setText(util.numberDay(i) + "\n" + readDate(weekdates.get(i)) + "");
+                    dayView.setText(util.numberDay(i) + "\n" + util.readDate(weekdates.get(i)) + "");
                     dayView.setLayoutParams(new LinearLayout.LayoutParams((screenWidth-viewWidth)/7, FILL_PARENT));//Thay doi size
                     dayView.setBackgroundColor(Color.CYAN);
                     dayView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -284,13 +286,6 @@ public class WeekViewAcitivity extends AppCompatActivity {
             result.add(util.addTime(date, i, define.DAY));
         }
         return result;
-    }
-
-    public static String readDate(Date date)
-    {
-        int month = date.getMonth() + 1;
-        int day = date.getDate();
-        return String.format("%02d", day) + "-" + String.format("%02d", month);
     }
     //DialogThem
     /*public void dialogThemmoc()

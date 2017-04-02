@@ -1,5 +1,7 @@
 package com.example.thienpham.time_remider;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import object.dto.periodeventdto;
 import object.dto.timeeventdto;
 import object.util;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
@@ -26,43 +30,72 @@ public class MainLichTrinhActivity extends AppCompatActivity {
         //Lấy thông tin trong Asynctask
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_lichtrinh);
+        showsessionDTO();
+
+        Button btback = (Button) findViewById(R.id.btBack);
+        btback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainLichTrinhActivity.this, WeekViewAcitivity.class);
+                startActivity(intent);
+            }
+        });
+        Button btadd = (Button) findViewById(R.id.btltAdd);
+        btadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainLichTrinhActivity.this, LichtrinhActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     public void showsessionDTO()
     {
-        class LichTrinhWork extends AsyncTask<Void, Void, List<Integer>>
+        class LichTrinhWork extends AsyncTask<Void, Void, List<String>>
         {
-            Hashtable btMap = new Hashtable();
+            public List<periodeventdto> dtohasinserted = new ArrayList<>();
 
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-
-            }
-
-            @Override
-            protected List<Integer> doInBackground(Void... params) {
+            protected List<String> doInBackground(Void... params) {
                 List<periodeventdto> listdto = periodeventdao.getall();
-                List<String> liststring = new ArrayList<>();
+
+                List<String> listsource = new ArrayList<>();
 
                 for(periodeventdto dto : listdto)
                 {
                     if(dto.userid == database.sessionuser.id)
                     {
-                        //Lấy thông tin
+                        listsource.add("Lịch trình: " + dto.note + "\n" + util.readDate(dto.datestart) + " - " + util.readDate(dto.dateend));
+                        dtohasinserted.add(dto);
                     }
                 }
-
-                return null;
+                return listsource;
             }
 
             @Override
-            protected void onPostExecute(List<Integer> listinsindex) {
-                super.onPostExecute(listinsindex);
+            protected void onPostExecute(List<String> listsource) {
+                super.onPostExecute(listsource);
 
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (MainLichTrinhActivity.this, android.R.layout.simple_list_item_1, listsource);
+
+                ListView lv = (ListView) findViewById(R.id.lvlichtrinh);
+                lv.setAdapter(adapter);
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        periodeventdto dto = dtohasinserted.get(position);
+
+                        Intent intent = new Intent(MainLichTrinhActivity.this, LichtrinhActivity.class);
+                        intent.putExtra("dto", dto);
+                        startActivity(intent);
+                    }
+                });
             }
         }
         new LichTrinhWork().execute();
     }
-
 }
 //Lấy sứ liệu Periodevent
