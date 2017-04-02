@@ -11,12 +11,17 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import object.dto.periodeventdto;
+import object.dto.timeeventdto;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MocAcitivty extends Activity {
     Button btTimestart,btTimeend,btDayselect,btCancel;
     Calendar cal = Calendar.getInstance();
+    timeeventdto loaddto;
+    int checkconfirm = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +43,39 @@ public class MocAcitivty extends Activity {
                 timeend();
             }
         });
-
         btDayselect.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void  onClick(View v){
                 dayselect();
             }
         });
+
+        /*
+        loaddto = (timeeventdto) getIntent().getSerializableExtra("dto");
+        if(loaddto != null) {
+            setupLoadDTO(loaddto);
+            checkconfirm = 1;
+        }*/
     }
+
+    /*
+    public void getDataforDto(timeeventdto dto)
+    {
+        dto.note = etnote.getText().toString();
+        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+        return;
+    }
+
+    public void setupLoadDTO(timeeventdto dto)
+    {
+        btTimestart.setText(readTime(dto.timestart));
+        btTimeend.setText(readTime(dto.timeend));
+
+
+        btConfirm.setText("Lưu");
+    }
+    */
+
     void timestart()
     {
         TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {

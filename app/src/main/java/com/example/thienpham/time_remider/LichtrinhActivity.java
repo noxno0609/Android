@@ -4,25 +4,29 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import object.dao.periodeventdao;
+import object.database;
 import object.dto.periodeventdto;
-import object.util;
 
-import java.sql.Time;
-import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class LichtrinhActivity extends Activity {
-    Button btDaystart, btDayend, btTimestart, btTimeend,btCancel, btConfirm;
-    EditText etnote;
-    Calendar cal = Calendar.getInstance();
-    CheckBox cbT2,cbT3,cbT4,cbT5,cbT6,cbT7,cbCN,cbMoingay;
-    int checkconfirm = 0;
+    static Button btDaystart, btDayend, btTimestart, btTimeend,btCancel, btConfirm;
+    static EditText etnote;
+    static Calendar cal = Calendar.getInstance();
+    static CheckBox cbT2,cbT3,cbT4,cbT5,cbT6,cbT7,cbCN,cbMoingay;
+    static periodeventdto loaddto;
+    static int checkconfirm = 0;
+    static public int work = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +52,31 @@ public class LichtrinhActivity extends Activity {
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                if(checkconfirm == 0)
-                    //periodeventdao.insert();
+                if(checkconfirm == 1)
+                {
+                    work = 2;
+                    workDTO();
+                    Toast.makeText(LichtrinhActivity.this, "Lưu lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
-                    //periodeventdao.update();
+                    work = 1;
+                    workDTO();
+                    Toast.makeText(LichtrinhActivity.this, "Thêm lịch trình thành công!", Toast.LENGTH_SHORT).show();
                 }
-                */
+                Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
+                startActivity(intent);
             }
         });
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkconfirm == 1)
+                {
+                    work = 0;
+                    workDTO();
+                    Toast.makeText(LichtrinhActivity.this, "Xóa lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                }
                 Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
                 startActivity(intent);
             }
@@ -96,25 +112,87 @@ public class LichtrinhActivity extends Activity {
             }
         });
 
-        periodeventdto dto = (periodeventdto) getIntent().getSerializableExtra("dto");
-        if(dto != null) {
-            setupLoadDTO(dto);
+        loaddto = (periodeventdto) getIntent().getSerializableExtra("dto");
+        if(loaddto != null) {
+            setupLoadDTO(loaddto);
             checkconfirm = 1;
         }
     }
 
-    public String readDate(Date date)
-    {
-        int month = date.getMonth() + 1;
-        int day = date.getDate();
-        return String.format("%02d", day) + "/" + String.format("%02d", month);
+    public void workDTO() {
+        class dtoWork extends AsyncTask<Void, Void, List<String>> {
+            private List<String> getData = new ArrayList<>();
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                getData = getDataList();
+            }
+
+            @Override
+            protected List<String> doInBackground(Void... params) {
+                //0 DELETE 1 INSERT 2 UPDATE
+                if(work == 0)
+                    periodeventdao.delete(loaddto);
+                else if(work == 1) {
+                    loaddto = setDataListforDto(getData);
+                    periodeventdao.insert(loaddto);
+                }
+                else if(work == 2) {
+                    int id = loaddto.id;
+                    loaddto = setDataListforDto(getData);
+                    loaddto.id = id;
+                    periodeventdao.update(loaddto);
+                }
+                return null;
+            }
+        }
+        new dtoWork().execute();
     }
 
-    public String readTime(Date time)
+    public static periodeventdto setDataListforDto(List<String> getData)
     {
-        int hour = time.getHours();
-        int minute = time.getMinutes();
-        return String.format("%02d", hour) + ":" + String.format("%02d", minute);
+        periodeventdto dto = new periodeventdto();
+        dto.note = getData.get(0);
+        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+        try {
+            dto.timestart = sf.parse(getData.get(1));
+            dto.timeend = sf.parse(getData.get(2));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        sf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dto.datestart = sf.parse(getData.get(3));
+            dto.dateend = sf.parse(getData.get(4));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        dto.dayselect = getData.get(5);
+
+        dto.userid = database.sessionuser.id;
+        return dto;
+    }
+
+    public static List<String> getDataList()  {
+        List<String> result = new ArrayList<>();
+
+        result.add(etnote.getText().toString());
+        result.add(btTimestart.getText().toString());
+        result.add(btTimeend.getText().toString());
+        result.add(btDaystart.getText().toString());
+        result.add(btDayend.getText().toString());
+        String dselect = "";
+        dselect += (cbT2.isChecked() == true) ? "1" : "0";
+        dselect += (cbT3.isChecked() == true) ? "1" : "0";
+        dselect += (cbT4.isChecked() == true) ? "1" : "0";
+        dselect += (cbT5.isChecked() == true) ? "1" : "0";
+        dselect += (cbT6.isChecked() == true) ? "1" : "0";
+        dselect += (cbT7.isChecked() == true) ? "1" : "0";
+        dselect += (cbCN.isChecked() == true) ? "1" : "0";
+        result.add(dselect);
+
+        return result;
     }
 
     public void setupLoadDTO(periodeventdto dto)
@@ -125,7 +203,6 @@ public class LichtrinhActivity extends Activity {
         btDayend.setText(readDate(dto.dateend));
         etnote.setText(dto.note);
 
-        //0000000
         boolean ischecked = (dto.dayselect.charAt(0) == '1') ? true : false;
         cbT2.setChecked(ischecked);
         ischecked = (dto.dayselect.charAt(1) == '1') ? true : false;
@@ -142,6 +219,22 @@ public class LichtrinhActivity extends Activity {
         cbCN.setChecked(ischecked);
 
         btConfirm.setText("Lưu");
+        btCancel.setText("Xóa");
+    }
+
+    public String readDate(Date date)
+    {
+        int year = date.getYear() + 1900;
+        int month = date.getMonth() + 1;
+        int day = date.getDate();
+        return String.format("%02d", day) + "/" + String.format("%02d", month) + "/" + year;
+    }
+
+    public String readTime(Date time)
+    {
+        int hour = time.getHours();
+        int minute = time.getMinutes();
+        return String.format("%02d", hour) + ":" + String.format("%02d", minute);
     }
 
     void timestart()
@@ -175,7 +268,7 @@ public class LichtrinhActivity extends Activity {
         DatePickerDialog dpd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                btDaystart.setText(dayOfMonth+"/"+String.format("%02d",month+1)+"/"+year);
+                btDaystart.setText(String.format("%02d",dayOfMonth)+"/"+String.format("%02d",month+1)+"/"+year);
             }
         },
                 cal.get(Calendar.YEAR),
@@ -188,7 +281,7 @@ public class LichtrinhActivity extends Activity {
         DatePickerDialog dpd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                btDayend.setText(dayOfMonth+"/"+String.format("%02d",month+1)+"/"+year);
+                btDayend.setText(String.format("%02d",dayOfMonth)+"/"+String.format("%02d",month+1)+"/"+year);
             }
         },
                 cal.get(Calendar.YEAR),

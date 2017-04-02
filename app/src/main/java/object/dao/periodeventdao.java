@@ -110,8 +110,8 @@ public class periodeventdao {
         List nameValuePair = new ArrayList(8);
         nameValuePair.add(new BasicNameValuePair("PE-TimeStart",format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("PE-TimeEnd",format.addSQLTime(dto.timeend)));
-        nameValuePair.add(new BasicNameValuePair("PE-DateStart", format.addSQLDate(dto.timestart)));
-        nameValuePair.add(new BasicNameValuePair("PE-DateEnd", format.addSQLDate(dto.timeend)));
+        nameValuePair.add(new BasicNameValuePair("PE-DateStart", format.addSQLDate(dto.datestart)));
+        nameValuePair.add(new BasicNameValuePair("PE-DateEnd", format.addSQLDate(dto.dateend)));
         nameValuePair.add(new BasicNameValuePair("PE-DaySelect", dto.dayselect.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-Note", dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-UserID", Integer.toString(dto.userid)));

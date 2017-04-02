@@ -111,7 +111,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
     {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.HOUR, 12);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -123,7 +123,6 @@ public class WeekViewAcitivity extends AppCompatActivity {
         class weekViewWork extends AsyncTask<Void, Void, List<Integer>>
         {
             Hashtable btMap = new Hashtable();
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -176,6 +175,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
                             btcell.setText(dto.note);
                             Hashtable btInfo = new Hashtable();
                             btInfo.put("params", cellLayoutParams);
+                            btInfo.put("dto", dto);
                             btcell.setBackgroundColor(Color.GREEN);
                             btMap.put(btcell, btInfo);
                         }
@@ -193,7 +193,16 @@ public class WeekViewAcitivity extends AppCompatActivity {
                     Button bt = itr.next();
                     Hashtable btinfo = (Hashtable) btMap.get(bt);
                     GridLayout.LayoutParams cellLayoutParams = (GridLayout.LayoutParams) btinfo.get("params");
+                    final timeeventdto dto = (timeeventdto) btinfo.get("dto");
                     weekview.addView(bt, cellLayoutParams);
+                    bt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(WeekViewAcitivity.this, MocAcitivty.class);
+                            intent.putExtra("dto", dto);
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 //Create Cell
@@ -287,31 +296,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
         }
         return result;
     }
-    //DialogThem
-    /*public void dialogThemmoc()
-    {
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.activity_moc,null);
-        AlertDialog.Builder alter = new AlertDialog.Builder(this);
-        alter.setTitle("Thêm mốc");
-        alter.setView(view);
-        alter.setCancelable(false);
-        alter.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(WeekViewAcitivity.this, "Bạn đã hủy", Toast.LENGTH_SHORT).show();
-            }
-        });
-        alter.setPositiveButton("Thêm mốc", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(WeekViewAcitivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-            }
-        });
-        AlertDialog dialog = alter.create();
-        dialog.show();
 
-    }*/
     public void timestart()
     {
         TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
