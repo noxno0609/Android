@@ -155,12 +155,14 @@ public class WeekViewAcitivity extends AppCompatActivity {
                         if(weekdates.contains(dto.dayselect))
                         {
                             int column = dto.dayselect.getDay();
+                            if(column == 0)
+                                column+=7;
                             int rowstart = getRowPos(dto.timestart);
                             int rowend = getRowPos(dto.timeend);
                             int rowlength = rowend - rowstart;
 
                             GridLayout.Spec colPos = GridLayout.spec(column, 1);
-                            GridLayout.Spec rowPos = GridLayout.spec(rowstart, rowlength);
+                            GridLayout.Spec rowPos = GridLayout.spec(rowstart+1, rowlength);
 
                             for(int i=rowstart;i<rowend;i++)
                             {
@@ -238,7 +240,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
 
     public static int getCellIndex(int r, int c)
     {
-        return (r*7+c)-1;
+        return (r*8+c)-1;
     }
     public static int getRowPos(Date time)
     {
