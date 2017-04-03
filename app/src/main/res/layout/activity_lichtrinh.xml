@@ -184,10 +184,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
                 android:inputType="textPersonName"
-                android:text="Name"
                 android:ems="10"
                 android:layout_below="@+id/spinner" android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp" android:id="@+id/editText2"/>
+                android:layout_marginTop="18dp" android:id="@+id/etltNote" android:hint="Nhập nội dung lịch trình"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
@@ -197,7 +196,7 @@
             <Button
                     android:text="Thêm"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/btAdd" android:layout_weight="1"/>
+                    android:layout_height="wrap_content" android:id="@+id/btConfirm" android:layout_weight="1"/>
             <Button
                     android:text="Hủy"
                     android:layout_width="wrap_content"

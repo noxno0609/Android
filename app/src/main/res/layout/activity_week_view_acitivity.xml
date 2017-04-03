@@ -21,7 +21,7 @@
         <Button
                 android:text="Lịch Trình"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" android:id="@+id/btLichTrinh" android:layout_weight="1"/>
+                android:layout_height="match_parent" android:id="@+id/btMainLichTrinh" android:layout_weight="1"/>
         <Button
                 android:text="Thêm"
                 android:layout_width="wrap_content"

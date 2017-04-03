@@ -119,4 +119,17 @@ public class util {
         return (int) (px / Resources.getSystem().getDisplayMetrics().density);
     }
 
+    public static String readDate(Date date)
+    {
+        int month = date.getMonth() + 1;
+        int day = date.getDate();
+        return String.format("%02d", day) + "/" + String.format("%02d", month);
+    }
+
+    public static String readTime(Date time)
+    {
+        int hour = time.getHours();
+        int minute = time.getMinutes();
+        return String.format("%02d", hour) + ":" + String.format("%02d", minute);
+    }
 }
