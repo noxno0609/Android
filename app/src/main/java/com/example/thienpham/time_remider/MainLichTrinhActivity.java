@@ -51,6 +51,8 @@ public class MainLichTrinhActivity extends AppCompatActivity {
                         //Lấy thông tin
                     }
                 }
+
+                return null;
             }
 
             @Override
