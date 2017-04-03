@@ -28,13 +28,14 @@
     </LinearLayout>
     <EditText
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:inputType="textPersonName"
             android:hint="Nội dung"
             android:gravity="center"
             android:ems="10"
             android:id="@+id/editText"
-            android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
     />
     <LinearLayout
@@ -51,18 +52,24 @@
             <Button
                     android:hint="Giờ bắt đầu"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" android:id="@+id/btTimestart" android:layout_weight="1"/>
+                    android:layout_height="70dp"
+                    android:id="@+id/btTimestart"
+                    android:layout_weight="1"/>
             <Button
                     android:hint="Giờ kết thúc"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" android:id="@+id/btTimeend" android:layout_weight="1"/>
+                    android:layout_height="70dp"
+                    android:id="@+id/btTimeend"
+                    android:layout_weight="1"/>
         </LinearLayout>
         <Button
                 android:hint="Ngày chọn"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="80dp"
                 android:layout_marginRight="80dp"
-                android:layout_height="100dp" android:id="@+id/btDayselect" android:layout_marginTop="10dp"/>
+                android:layout_height="70dp"
+                android:id="@+id/btDayselect"
+                android:layout_marginTop="10dp"/>
     </LinearLayout>
     <Spinner
             android:layout_width="match_parent"

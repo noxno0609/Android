@@ -16,7 +16,8 @@
         <Button
                 android:text="Đăng Xuất"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" android:id="@+id/btLogOut" android:layout_weight="1"/>
+                android:layout_height="match_parent"
+                android:id="@+id/btLogOut"/>
         <Button
                 android:text="Lịch Trình"
                 android:layout_width="wrap_content"
@@ -38,12 +39,6 @@
                 tools:layout_editor_absoluteY="8dp"
                 tools:layout_editor_absoluteX="40dp" android:id="@+id/weekdaylayout" android:layout_width="fill_parent">
         </LinearLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="40dp"
-                tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp"
-                android:id="@+id/timeviewlayout" android:layout_height="60dp">
-        </LinearLayout>
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_marginTop="60dp"
@@ -60,6 +55,13 @@
 
             </GridLayout>
         </ScrollView>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="40dp"
+                tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp"
+                android:id="@+id/timeviewlayout" android:layout_height="60dp" android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true" android:layout_alignParentStart="true">
+        </LinearLayout>
     </RelativeLayout>
 
 

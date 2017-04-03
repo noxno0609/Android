@@ -37,6 +37,10 @@
         </activity>
         <activity android:name=".WeekViewAcitivity">
         </activity>
+        <activity
+                android:name=".MocAcitivty"
+                android:theme="@style/Theme.AppCompat.Dialog">
+        </activity>
     </application>
 
 </manifest>

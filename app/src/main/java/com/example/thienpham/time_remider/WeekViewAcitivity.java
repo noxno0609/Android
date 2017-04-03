@@ -1,6 +1,10 @@
 package com.example.thienpham.time_remider;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -8,10 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.view.*;
 import android.widget.*;
 import event.OnSwipeTouchListener;
 import object.dao.timeeventdao;
@@ -37,6 +38,8 @@ public class WeekViewAcitivity extends AppCompatActivity {
     public static List<Date> weekdates;
     public static int screenWidth, screenHeight, viewWidth;
     public static Date nowDate = new Date();
+    public static Button btAddTE,btTimestart,btTimeend,btDayselect;
+    Calendar cal = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,23 @@ public class WeekViewAcitivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
+        btAddTE = (Button) findViewById(R.id.btAddTE);
+        btAddTE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekViewAcitivity.this,MocAcitivty.class);
+                startActivity(intent);
+            }
+        });
+        /*btTimestart  = (Button) findViewById(R.id.btTimestart);
+        btTimeend = (Button) findViewById(R.id.btTimeend);
+        btDayselect=(Button) findViewById(R.id.btDayselect);
+        btAddTE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogThemmoc();
+            }
+        });*/
 
         Button logout = (Button) findViewById(R.id.btLogOut);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -271,6 +291,45 @@ public class WeekViewAcitivity extends AppCompatActivity {
         int month = date.getMonth() + 1;
         int day = date.getDate();
         return String.format("%02d", day) + "-" + String.format("%02d", month);
+    }
+    //DialogThem
+    /*public void dialogThemmoc()
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.activity_moc,null);
+        AlertDialog.Builder alter = new AlertDialog.Builder(this);
+        alter.setTitle("Thêm mốc");
+        alter.setView(view);
+        alter.setCancelable(false);
+        alter.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(WeekViewAcitivity.this, "Bạn đã hủy", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alter.setPositiveButton("Thêm mốc", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(WeekViewAcitivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = alter.create();
+        dialog.show();
+
+    }*/
+    public void timestart()
+    {
+        TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                btTimestart.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
+            }
+        },
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true);
+
+        tpd.show();
     }
 }
 

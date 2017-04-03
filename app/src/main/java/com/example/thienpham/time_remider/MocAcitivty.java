@@ -1,5 +1,6 @@
 package com.example.thienpham.time_remider;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -13,17 +14,18 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class MocAcitivty extends AppCompatActivity {
+public class MocAcitivty extends Activity {
     Button btTimestart,btTimeend,btDayselect,btCancel;
     Calendar cal = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moc);
-        btCancel=(Button) findViewById(R.id.btCancel);
+
         btTimestart =(Button) findViewById(R.id.btTimestart);
         btTimeend =(Button) findViewById(R.id.btTimeend);
         btDayselect =(Button) findViewById(R.id.btDayselect);
+
         btTimestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,18 +38,11 @@ public class MocAcitivty extends AppCompatActivity {
                 timeend();
             }
         });
+
         btDayselect.setOnClickListener(new View.OnClickListener(){
             @Override
             public  void  onClick(View v){
                 dayselect();
-            }
-        });
-        btCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MocAcitivty.this,ShowActivity.class);
-                startActivity(intent);
-                Toast.makeText(MocAcitivty.this, "Bạn đã hủy Mốc", Toast.LENGTH_SHORT).show();
             }
         });
     }
