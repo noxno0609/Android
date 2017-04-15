@@ -33,6 +33,8 @@ public class MocAcitivty extends Activity {
     int checkconfirm = 0;
     int work = 0;
 
+    Intent weekviewintent = new Intent(this, WeekViewAcitivity.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +80,7 @@ public class MocAcitivty extends Activity {
                     workDTO();
                     Toast.makeText(MocAcitivty.this, "Thêm sự kiện thành công!", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(MocAcitivty.this, WeekViewAcitivity.class);
-                startActivity(intent);
+                startActivity(weekviewintent);
             }
         });
         btCancel.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +92,7 @@ public class MocAcitivty extends Activity {
                     workDTO();
                     Toast.makeText(MocAcitivty.this, "Xóa sự kiện thành công!", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(MocAcitivty.this, WeekViewAcitivity.class);
-                startActivity(intent);
+                startActivity(weekviewintent);
             }
         });
 
@@ -173,6 +173,7 @@ public class MocAcitivty extends Activity {
         btDayselect.setText(readDate(dto.dayselect));
         etNote.setText(dto.note);
         btConfirm.setText("Lưu");
+        btCancel.setText("Xóa");
     }
 
     public String readDate(Date date)
