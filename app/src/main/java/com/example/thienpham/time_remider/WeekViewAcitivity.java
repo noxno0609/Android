@@ -298,20 +298,5 @@ public class WeekViewAcitivity extends AppCompatActivity {
         }
         return result;
     }
-
-    public void timestart()
-    {
-        TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                btTimestart.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
-            }
-        },
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE),
-                true);
-
-        tpd.show();
-    }
 }
 

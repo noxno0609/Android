@@ -14,6 +14,7 @@ import object.database;
 import object.dto.periodeventdto;
 import object.dto.timeeventdto;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class MocAcitivty extends Activity {
     timeeventdto loaddto;
     int checkconfirm = 0;
     int work = 0;
+    public int timeInterval = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,13 +197,20 @@ public class MocAcitivty extends Activity {
         TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if(minute % timeInterval != 0)
+                {
+                    int minuteFloor=minute-(minute%timeInterval);
+                    minute=minuteFloor + (minute==minuteFloor+1 ? timeInterval : 0);
+                    if (minute==60)
+                        minute=0;
+                    view.setCurrentMinute(minute);
+                }
                 btTimestart.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
             }
         },
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE),
                 true);
-
         tpd.show();
     }
     void timeend()
@@ -209,13 +218,20 @@ public class MocAcitivty extends Activity {
         TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                btTimeend.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
+                if(minute % timeInterval != 0)
+                {
+                    int minuteFloor=minute-(minute%timeInterval);
+                    minute=minuteFloor + (minute==minuteFloor+1 ? timeInterval : 0);
+                    if (minute==60)
+                        minute=0;
+                    view.setCurrentMinute(minute);
+                }
+                btTimestart.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
             }
         },
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE),
                 true);
-
         tpd.show();
     }
     void dayselect()

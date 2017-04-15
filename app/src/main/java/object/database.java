@@ -174,7 +174,7 @@ public class database {
         } catch (IOException e) {
             return 0;
         }
-        return Integer.parseInt(result);
+        return 1;
     }
 
     public static int postMethod(int type, int id, List nameValuePair, String posttype)
@@ -211,6 +211,6 @@ public class database {
         } catch (IOException e) {
             return 0;
         }
-        return Integer.parseInt(result);
+        return 1;
     }
 }
