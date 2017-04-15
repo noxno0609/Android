@@ -33,8 +33,6 @@ public class MocAcitivty extends Activity {
     int checkconfirm = 0;
     int work = 0;
 
-    Intent weekviewintent = new Intent(this, WeekViewAcitivity.class);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +78,7 @@ public class MocAcitivty extends Activity {
                     workDTO();
                     Toast.makeText(MocAcitivty.this, "Thêm sự kiện thành công!", Toast.LENGTH_SHORT).show();
                 }
+                Intent weekviewintent = new Intent(MocAcitivty.this, WeekViewAcitivity.class);
                 startActivity(weekviewintent);
             }
         });
@@ -92,10 +91,10 @@ public class MocAcitivty extends Activity {
                     workDTO();
                     Toast.makeText(MocAcitivty.this, "Xóa sự kiện thành công!", Toast.LENGTH_SHORT).show();
                 }
+                Intent weekviewintent = new Intent(MocAcitivty.this, WeekViewAcitivity.class);
                 startActivity(weekviewintent);
             }
         });
-
         loaddto = (timeeventdto) getIntent().getSerializableExtra("dto");
         if(loaddto != null) {
             setupLoadDTO(loaddto);
