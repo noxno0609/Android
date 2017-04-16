@@ -11,6 +11,7 @@ import android.widget.*;
 import object.dao.periodeventdao;
 import object.database;
 import object.dto.periodeventdto;
+import object.format;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -151,24 +152,14 @@ public class LichtrinhActivity extends Activity {
     {
         periodeventdto dto = new periodeventdto();
         dto.note = getData.get(0);
-        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
-        try {
-            dto.timestart = sf.parse(getData.get(1));
-            dto.timeend = sf.parse(getData.get(2));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        sf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            dto.datestart = sf.parse(getData.get(3));
-            dto.dateend = sf.parse(getData.get(4));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        dto.timestart = format.parseTime(getData.get(1));
+        dto.timeend =  format.parseTime(getData.get(2));
+        dto.datestart = MocAcitivty.parseTextDate(getData.get(3));
+        dto.dateend = MocAcitivty.parseTextDate(getData.get(4));
         dto.dayselect = getData.get(5);
-
         dto.userid = database.sessionuser.id;
+        dto.textcolor = "0xffff0000";
+        dto.bgcolor = "0xffffffff";
         return dto;
     }
 
@@ -326,5 +317,4 @@ public class LichtrinhActivity extends Activity {
             cbCN.setChecked(false);
         }
     }
-
 }

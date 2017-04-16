@@ -17,4 +17,6 @@ public class periodeventdto implements Serializable {
     public Date dateend;
     public String dayselect;
     public String note;
+    public String textcolor;
+    public String bgcolor;
 }

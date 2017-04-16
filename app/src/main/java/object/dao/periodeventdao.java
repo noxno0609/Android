@@ -37,6 +37,8 @@ public class periodeventdao {
             resultdto.datestart = format.parseDate(json.getString("DateStart"));
             resultdto.dateend = format.parseDate(json.getString("DateEnd"));
             resultdto.note = json.getString("Note");
+            resultdto.textcolor = json.getString("TextColor");
+            resultdto.bgcolor = json.getString("BGColor");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -62,6 +64,8 @@ public class periodeventdao {
                 dto.datestart = format.parseDate(json.getJSONObject(i).getString("DateStart"));
                 dto.dateend = format.parseDate(json.getJSONObject(i).getString("DateEnd"));
                 dto.note = json.getJSONObject(i).getString("Note");
+                dto.textcolor = json.getJSONObject(i).getString("TextColor");
+                dto.bgcolor = json.getJSONObject(i).getString("BGColor");
                 listresultdto.add(dto);
             }
         } catch (JSONException e) {
@@ -80,6 +84,8 @@ public class periodeventdao {
         nameValuePair.add(new BasicNameValuePair("PE-DaySelect",dto.dayselect.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-Note",dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-UserID",Integer.toString(dto.userid)));
+        nameValuePair.add(new BasicNameValuePair("PE-TextColor", dto.textcolor.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-BGColor", dto.bgcolor.toString()));
 
         int newid = database.postMethod(define.DTO.PeriodEvent, nameValuePair);
         if(newid > 0)
@@ -111,6 +117,8 @@ public class periodeventdao {
         nameValuePair.add(new BasicNameValuePair("PE-DaySelect", dto.dayselect.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-Note", dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-UserID", Integer.toString(dto.userid)));
+        nameValuePair.add(new BasicNameValuePair("PE-TextColor", dto.textcolor.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-BGColor", dto.bgcolor.toString()));
 
         int result = database.postMethod(define.DTO.PeriodEvent, dto.id, nameValuePair, "PUT");
 

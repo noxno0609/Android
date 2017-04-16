@@ -3,6 +3,7 @@ package com.example.thienpham.time_remider;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -213,15 +214,27 @@ public class WeekViewAcitivity extends AppCompatActivity {
                         int cellindex = getCellIndex(r,c);
                         if(listinsindex.contains(cellindex))
                             continue;
+
+                        /*
+                        GradientDrawable gd = new GradientDrawable();
+                        gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
+                        gd.setCornerRadius(5);
+                        gd.setStroke(1, 0xFF000000);
+                        //TextView tv = (TextView)findViewById(R.id.textView1);
+                        //tv.setBackgroundDrawable(gd);
+                        */
                         Button btCell = new Button(WeekViewAcitivity.this);
                         btCell.setSingleLine(false);
                         GridLayout.LayoutParams cellLayoutParams = new GridLayout.LayoutParams(rowPos, colPos);
                         cellLayoutParams.width = (screenWidth-viewWidth)/7;
                         cellLayoutParams.height = 10;
                         btCell.setLayoutParams(cellLayoutParams);//Thay doi size
+                       // btCell.setBackground(gd);
+
                         if(r == numborder) {
                             btCell.setBackgroundResource(R.drawable.cell_border);
                         }
+
                         weekview.addView(btCell, cellLayoutParams);
                     }
                     if(r == numborder)
