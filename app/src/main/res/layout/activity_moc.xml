@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -18,13 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
     >
-
-        <Space
-                android:id="@+id/spacer_head"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-        />
 
         <LinearLayout
                 android:id="@+id/layout1_1"
@@ -75,8 +69,8 @@
                     android:id="@+id/btmocDayselect"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="75dp"
-                    android:layout_marginRight="75dp"
+                    android:layout_marginLeft="73dp"
+                    android:layout_marginRight="73dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:inputType="date"
@@ -131,13 +125,6 @@
                     android:textSize="15sp"
             />
 
-            <Space
-                    android:id="@+id/spacer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-            />
-
             <Button
                     android:id="@+id/btmocCancel"
                     android:layout_width="match_parent"
@@ -152,12 +139,5 @@
                     android:textSize="15sp"
             />
         </LinearLayout>
-
-        <Space
-                android:id="@+id/spacer_tail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-        />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
