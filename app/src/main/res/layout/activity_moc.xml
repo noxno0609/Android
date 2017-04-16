@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@android:color/holo_blue_dark"
+>
+
+    <LinearLayout
+            android:id="@+id/layout1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    >
+
+        <Space
+                android:id="@+id/spacer_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+        />
+
+        <LinearLayout
+                android:id="@+id/layout1_1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+        >
+            <Button
+                    android:id="@+id/btmocTimestart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="time"
+                    android:hint="Giờ bắt đầu"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+            />
+
+            <Button
+                    android:id="@+id/btmocTimeend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="time"
+                    android:hint="Giờ kết thúc"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layout1_2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+        >
+            <Button
+                    android:id="@+id/btmocDayselect"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginRight="75dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="date"
+                    android:hint="Ngày chọn"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layout1_3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+        >
+
+        </LinearLayout>
+
+        <EditText
+                android:id="@+id/etmocNote"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:background="@drawable/shape"
+                android:hint="Nội dung ghi chú..."
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:gravity="top"
+        />
+
+        <LinearLayout
+                android:id="@+id/layout1_4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+        >
+            <Button
+                    android:id="@+id/btmocConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="time"
+                    android:text="Thêm"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+            />
+
+            <Space
+                    android:id="@+id/spacer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+            />
+
+            <Button
+                    android:id="@+id/btmocCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="time"
+                    android:text="Huỷ bỏ"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+            />
+        </LinearLayout>
+
+        <Space
+                android:id="@+id/spacer_tail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+        />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
