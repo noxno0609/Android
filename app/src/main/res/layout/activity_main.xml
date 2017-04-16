@@ -1,93 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_main"
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="com.example.thienpham.time_remider.MainActivity" android:background="@android:color/holo_blue_light">
+        tools:context="com.example.thienpham.time_remider.LoginActivity"
+        android:background="@android:color/holo_blue_light"
+>
 
-    <TextView
-            android:text="Time Reminder"
-            android:textSize="30dp"
-            android:layout_marginTop="100dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvName"
-            android:layout_weight="1"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
     <LinearLayout
+            android:id="@+id/Linear1"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        android:id="@+id/infoLogin"
-        android:layout_below="@+id/etUserLogin"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <EditText
-                android:layout_width="wrap_content"
-                android:inputType="textPassword"
-                android:layout_marginTop="15dp"
-                android:ems="10"
-                android:layout_gravity="center"
-                android:textSize="20dp"
-                android:id="@+id/etPassLogin"
-                android:layout_weight="1"
-                android:hint="Password"
-                android:background="@android:color/background_light"
-                android:layout_height="wrap_content"/>
-        <CheckBox
-                android:text="Remember ID?"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="35dp"
-                android:textSize="15dp"
-                android:id="@+id/cbRememberLogin"
-                android:layout_weight="1"/>
-        <Button
-                android:text="ĐĂNG NHẬP"
-                android:layout_height="wrap_content"
-                android:id="@+id/btDangnhap"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/cbRememberLogin"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_width="250dp"/>
-        <TextView
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+    >
+        <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/tvSignupLogin"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center"
-                android:text="Chưa có tài khoản?"
-                android:textAlignment="center" android:textStyle="normal|bold"/>
-    </LinearLayout>
+                android:layout_height="match_parent"
+                android:src="@mipmap/icon_timereminder"
+                android:layout_weight="0.71"
+                android:scaleType="fitCenter"
+        />
 
-    <Button
-        android:id="@+id/btDangkiMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/infoLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:text="Đăng kí" />
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/etUserLogin"
-            android:layout_weight="1"
-            android:hint="UserID"
-            android:background="@android:color/background_light"
-            android:layout_marginTop="33dp" android:layout_below="@+id/tvName" android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+        <LinearLayout
+                android:id="@+id/Linear2"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.65"
+        >
+
+            <Space 
+                    android:id="@+id/spacer"
+                    android:layout_width="match_parent" 
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+            />
+
+            <LinearLayout
+                    android:id="@+id/Linear3"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.75"
+            >
+                <Button
+                        android:id="@+id/btDangNhap"
+                        android:text="Đăng Nhập"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/black_overlay"
+                />
+
+                <TextView
+                        android:id="@+id/tvQuestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1.3"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginRight="35dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:text="Chưa có tài khoản?"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                />
+
+                <Button
+                        android:id="@+id/btDangKy"
+                        android:text="Đăng Ký"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1.1"
+                        android:background="@color/black_overlay"
+                />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

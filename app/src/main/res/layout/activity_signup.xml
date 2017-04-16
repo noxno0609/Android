@@ -1,91 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.thienpham.time_remider.SignupActivity">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light"
+        tools:context="com.example.thienpham.time_remider.SignupActivity">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:layout_constraintTop_creator="1" tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1" app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+    >
 
+        <ImageView
+                android:id="@+id/imageLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="13"
+                android:src="@mipmap/icon_timereminder"
+                android:scaleType="fitCenter"
+        />
 
         <TextView
-            android:id="@+id/tvSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="Đăng kí"
-            android:textColor="#2962ff"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="13dp"
-            android:text="Đăng kí" />
-        <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:gravity="center"
-                android:layout_marginLeft="70dp"
-                android:orientation="vertical" android:layout_below="@+id/tvSignup"
-                android:layout_centerHorizontal="true">
-
-            <EditText
-                android:id="@+id/etName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:textColor="#2962ff"
-                android:hint="Tên người dùng"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/etPass"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:textColor="#2962ff"
-                android:hint="Mật khẩu"
-                android:inputType="textPassword" />
-
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:textColor="#2962ff"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
-
-            <EditText
-                android:id="@+id/etPhone"
+                android:id="@+id/tvDangky"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:textColor="#2962ff"
-                android:hint="Số điện thoại"
-                android:inputType="phone" />
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:layout_weight="17.5"
+                android:layout_marginTop="30dp"
+                android:text="ĐĂNG KÝ TÀI KHOẢN"
+                android:textStyle="bold"
+                android:textSize="35dp"
+                android:textColor="#ffffff"
+        />
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:layout_weight="9"
+        >
 
+            <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="15"
+                    android:hint="Tên tài khoản"
+                    android:paddingLeft="10dp"
+                    android:inputType="text"
+            />
+
+            <EditText
+                    android:id="@+id/etPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="15"
+                    android:hint="Mật khẩu"
+                    android:paddingLeft="10dp"
+                    android:inputType="textPassword"
+            />
+
+            <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="15"
+                    android:hint="Email"
+                    android:paddingLeft="10dp"
+                    android:inputType="textEmailAddress"
+            />
+
+            <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="15"
+                    android:hint="Số điện thoại"
+                    android:paddingLeft="10dp"
+                    android:inputType="phone"
+            />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="12"
+
+            >
+
+                <Button
+                        android:id="@+id/btSignup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="13"
+                        android:text="ĐĂNG KÝ"
+                        android:textAlignment="center"
+                />
+
+                <Button
+                        android:id="@+id/btCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="13"
+                        android:text="HUỶ BỎ"
+                        android:textAlignment="center"
+                />
+            </LinearLayout>
         </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
