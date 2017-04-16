@@ -29,8 +29,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by BenX on 18/03/2017.
@@ -44,14 +43,14 @@ public class timeeventdao {
             JSONObject json = new JSONObject(jsonstr);
             resutldto.id = json.getInt("id");
             resutldto.userid = json.getInt("UserID");
-            resutldto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getString("TimeStart"));
-            resutldto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getString("TimeEnd"));
-            resutldto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("DaySelect"));
+            resutldto.timestart =format.parseTime(json.getString("TimeStart"));
+            resutldto.timeend = format.parseTime(json.getString("TimeEnd"));
+            resutldto.dayselect = format.parseDate(json.getString("DaySelect"));
             resutldto.note = json.getString("Note");
             resutldto.pe_id = json.getInt("PE_ID");
+            resutldto.textcolor = json.getString("TextColor");
+            resutldto.bgcolor = json.getString("BGColor");
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
         return resutldto;
@@ -61,21 +60,22 @@ public class timeeventdao {
         String jsonstr = database.getMethod(define.DTO.TimeEvent);
         List<timeeventdto> listresutldto = new ArrayList<timeeventdto>();
 
+        SimpleDateFormat sf = null;
         try {
             JSONArray json = new JSONArray(jsonstr);
             for (int i = 0; i < json.length(); i++) {
                 timeeventdto dto = new timeeventdto();
                 dto.id = json.getJSONObject(i).getInt("id");
                 dto.userid = json.getJSONObject(i).getInt("UserID");
-                dto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeStart"));
-                dto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeEnd"));
-                dto.dayselect = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("DaySelect"));
+                dto.timestart = format.parseTime(json.getJSONObject(i).getString("TimeStart"));
+                dto.timeend = format.parseTime(json.getJSONObject(i).getString("TimeEnd"));
+                dto.dayselect = format.parseDate(json.getJSONObject(i).getString("DaySelect"));
                 dto.note = json.getJSONObject(i).getString("Note");
                 dto.pe_id = json.getJSONObject(i).getInt("PE_ID");
+                dto.textcolor = json.getJSONObject(i).getString("TextColor");
+                dto.bgcolor = json.getJSONObject(i).getString("BGColor");
                 listresutldto.add(dto);
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -84,13 +84,15 @@ public class timeeventdao {
 
     public static int insert (timeeventdto dto)
     {
-        List nameValuePair = new ArrayList(6);
+        List nameValuePair = new ArrayList(8);
         nameValuePair.add(new BasicNameValuePair("TE-TimeStart", format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("TE-TimeEnd", format.addSQLTime(dto.timeend)));
         nameValuePair.add(new BasicNameValuePair("TE-DaySelect", format.addSQLDate(dto.dayselect)));
         nameValuePair.add(new BasicNameValuePair("TE-Note", dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("TE-UserID", Integer.toString(dto.userid)));
         nameValuePair.add(new BasicNameValuePair("TE-PE_ID", Integer.toString(dto.pe_id)));
+        nameValuePair.add(new BasicNameValuePair("TE-TextColor", dto.textcolor.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-BGColor", dto.bgcolor.toString()));
 
         int newid = database.postMethod(define.DTO.TimeEvent, nameValuePair);
         if (newid > 0)
@@ -101,13 +103,15 @@ public class timeeventdao {
 
     public static boolean update(timeeventdto dto)
     {
-        List nameValuePair = new ArrayList(6);
+        List nameValuePair = new ArrayList(8);
         nameValuePair.add(new BasicNameValuePair("TE-TimeStart", format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("TE-TimeEnd", format.addSQLTime(dto.timeend)));
         nameValuePair.add(new BasicNameValuePair("TE-DaySelect", format.addSQLDate(dto.dayselect)));
         nameValuePair.add(new BasicNameValuePair("TE-Note", dto.note.toString()));
         nameValuePair.add(new BasicNameValuePair("TE-UserID", Integer.toString(dto.userid)));
         nameValuePair.add(new BasicNameValuePair("TE-PE_ID", Integer.toString(dto.pe_id)));
+        nameValuePair.add(new BasicNameValuePair("TE-TextColor", dto.textcolor.toString()));
+        nameValuePair.add(new BasicNameValuePair("TE-BGColor", dto.bgcolor.toString()));
 
         int result = database.postMethod(define.DTO.TimeEvent, dto.id, nameValuePair,"PUT");
 

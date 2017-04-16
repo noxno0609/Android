@@ -14,10 +14,7 @@ import object.dto.periodeventdto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class LichtrinhActivity extends Activity {
     static Button btDaystart, btDayend, btTimestart, btTimeend,btCancel, btConfirm;
@@ -272,7 +269,7 @@ public class LichtrinhActivity extends Activity {
                         minute=0;
                     view.setCurrentMinute(minute);
                 }
-                btTimestart.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
+                btTimeend.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
             }
         },
                 cal.get(Calendar.HOUR_OF_DAY),

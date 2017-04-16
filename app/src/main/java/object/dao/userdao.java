@@ -48,10 +48,11 @@ public class userdao {
             for(int i=0;i< jsonstr.length();i++)
             {
                 userdto dto = new userdto();
-                dto.id = json.getJSONObject(i).getInt("ID");
+                dto.id = json.getJSONObject(i).getInt("id");
                 dto.Name = json.getJSONObject(i).getString("Name");
                 dto.Password = json.getJSONObject(i).getString("Password");
                 dto.Email = json.getJSONObject(i).getString("Email");
+                dto.Phone = json.getJSONObject(i).getString("Phone");
                 listresultdto.add(dto);
             }
         } catch (JSONException e) {
@@ -66,6 +67,7 @@ public class userdao {
         nameValuePair.add(new BasicNameValuePair("US-Name", dto.Name.toString()));
         nameValuePair.add(new BasicNameValuePair("US-Password", dto.Password.toString()));
         nameValuePair.add(new BasicNameValuePair("US-Email", dto.Email.toString()));;
+        nameValuePair.add(new BasicNameValuePair("US-Phone", dto.Phone.toString()));;
 
         int newid = database.postMethod(define.DTO.User, nameValuePair);
         if(newid > 0)
