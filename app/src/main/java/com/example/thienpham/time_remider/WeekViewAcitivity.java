@@ -1,34 +1,24 @@
 package com.example.thienpham.time_remider;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.*;
 import event.OnSwipeTouchListener;
 import object.dao.timeeventdao;
-import object.dao.userdao;
 import object.database;
 import object.define;
 import object.dto.timeeventdto;
-import object.dto.userdto;
-import object.format;
 import object.util;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class WeekViewAcitivity extends AppCompatActivity {
     public static LinearLayout timeViewLayout;
@@ -112,6 +102,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -139,6 +130,8 @@ public class WeekViewAcitivity extends AppCompatActivity {
                     dayView.setBackgroundColor(Color.CYAN);
                     dayView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     dayView.setGravity(Gravity.CENTER);
+                    dayView.setSingleLine(false);
+                    dayView.setBackgroundResource(R.drawable.event_border);
                     weekdaylayout.addView(dayView);
                 }
             }
@@ -221,6 +214,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
                         if(listinsindex.contains(cellindex))
                             continue;
                         Button btCell = new Button(WeekViewAcitivity.this);
+                        btCell.setSingleLine(false);
                         GridLayout.LayoutParams cellLayoutParams = new GridLayout.LayoutParams(rowPos, colPos);
                         cellLayoutParams.width = (screenWidth-viewWidth)/7;
                         cellLayoutParams.height = 10;
@@ -249,13 +243,29 @@ public class WeekViewAcitivity extends AppCompatActivity {
     public void createWeekViewBone()
     {
         LinearLayout weekdaylayout = (LinearLayout) findViewById(R.id.weekdaylayout);
+
         //Create Intersection (Điểm giao Header và Time View)
-        TextView interView = new TextView(WeekViewAcitivity.this);
-        interView.setText("");
+        ImageButton interView = new ImageButton(WeekViewAcitivity.this);
         interView.setLayoutParams(new LinearLayout.LayoutParams(FILL_PARENT, weekdaylayout.getHeight()));//Thay doi size
         interView.setBackgroundColor(Color.CYAN);
         interView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        interView.setGravity(Gravity.CENTER);
+        interView.setBackgroundResource(R.drawable.calendar_icon);
+        interView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dpd = new DatePickerDialog(WeekViewAcitivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        nowDate = MocAcitivty.parseTextDate(String.format("%02d/%02d/%04d", dayOfMonth, month, year));
+                        showsessionDTO();
+                    }
+                },
+                        cal.get(Calendar.YEAR),
+                        cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH));
+                dpd.show();
+            }
+        });
         timeViewLayout.addView(interView);
 
         //Code For Week View
@@ -277,9 +287,10 @@ public class WeekViewAcitivity extends AppCompatActivity {
             cellLayoutParams.width = viewWidth;
             cellLayoutParams.height = 10*12;
             hourView.setLayoutParams(cellLayoutParams);
-            hourView.setBackgroundColor(Color.CYAN);
+            //hourView.setBackgroundColor(Color.CYAN);
             hourView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             hourView.setGravity(Gravity.CENTER);
+            hourView.setBackgroundResource(R.drawable.cell_border);
 
             weekview.addView(hourView, cellLayoutParams);
             hour++;

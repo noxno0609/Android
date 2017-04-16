@@ -32,15 +32,13 @@ public class periodeventdao {
             resultdto.id = json.getInt("id");
             resultdto.userid = json.getInt("UserID");
             resultdto.dayselect = json.getString("DaySelect");
-            resultdto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getString("TimeStart"));
-            resultdto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getString("TimeEnd"));
-            resultdto.datestart = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("DateStart"));
-            resultdto.dateend = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("DateEnd"));
+            resultdto.timestart = format.parseTime(json.getString("TimeStart"));
+            resultdto.timeend = format.parseTime(json.getString("TimeEnd"));
+            resultdto.datestart = format.parseDate(json.getString("DateStart"));
+            resultdto.dateend = format.parseDate(json.getString("DateEnd"));
             resultdto.note = json.getString("Note");
 
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
         return resultdto;
@@ -59,16 +57,14 @@ public class periodeventdao {
                 dto.id = json.getJSONObject(i).getInt("id");
                 dto.userid = json.getJSONObject(i).getInt("UserID");
                 dto.dayselect = json.getJSONObject(i).getString("DaySelect");
-                dto.timestart = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeStart"));
-                dto.timeend = new SimpleDateFormat("HH:mm:ss").parse(json.getJSONObject(i).getString("TimeEnd"));
-                dto.datestart = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("DateStart"));
-                dto.dateend = new SimpleDateFormat("yyyy-MM-dd").parse(json.getJSONObject(i).getString("DateEnd"));
+                dto.timestart = format.parseTime(json.getJSONObject(i).getString("TimeStart"));
+                dto.timeend = format.parseTime(json.getJSONObject(i).getString("TimeEnd"));
+                dto.datestart = format.parseDate(json.getJSONObject(i).getString("DateStart"));
+                dto.dateend = format.parseDate(json.getJSONObject(i).getString("DateEnd"));
                 dto.note = json.getJSONObject(i).getString("Note");
                 listresultdto.add(dto);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
         return listresultdto;
