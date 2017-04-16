@@ -65,7 +65,13 @@ public class MocAcitivty extends Activity {
         });
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                if(checkinputdate()==false)
+                {
+                    Toast.makeText(MocAcitivty.this, "Giờ bắt đầu phải trước giờ bắt thúc 15 phút", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(checkconfirm == 1)
                 {
                     work = 2;
@@ -231,4 +237,23 @@ public class MocAcitivty extends Activity {
                 cal.get(Calendar.DAY_OF_MONTH));
         dpd.show();
     }
+    boolean checkinputdate()
+    {
+        Date giobd,giokt = null;
+        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+        try {
+            giobd = sf.parse(btTimestart.getText().toString());
+            giokt = sf.parse(btTimeend.getText().toString());
+            if(giobd.before(giokt))
+            {
+                long millis=giokt.getTime()-giobd.getTime();
+                if(millis>=900000)
+                    return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

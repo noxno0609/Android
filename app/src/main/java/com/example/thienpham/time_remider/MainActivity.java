@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                             new LoadData().execute();
                         }
                     });
+
             }
         });
     }
@@ -80,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
             EditText etuser = (EditText) findViewById(R.id.etUserLogin);
             EditText etpassword = (EditText) findViewById(R.id.etPassLogin);
 
+            if(etuser.getText().toString().equals(""))
+                return "Chưa nhập tên đăng nhập";
+            if (etpassword.getText().toString().equals(""))
+                return "Chưa nhập mật khẩu";
+
             List<userdto> listdto = userdao.getall();
             for(userdto dto : listdto)
             {
@@ -90,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             return "Sai tên đăng nhập hoặc mật khẩu";
+
         }
 
         @Override
@@ -103,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+
     }
+
 }
 
