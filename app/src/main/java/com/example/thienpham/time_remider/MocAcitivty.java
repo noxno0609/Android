@@ -11,15 +11,16 @@ import android.view.View;
 import android.widget.*;
 import object.dao.timeeventdao;
 import object.database;
+import object.define;
 import object.dto.periodeventdto;
 import object.dto.timeeventdto;
+import object.format;
+import object.util;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MocAcitivty extends Activity {
     static Button btTimestart;
@@ -32,6 +33,8 @@ public class MocAcitivty extends Activity {
     timeeventdto loaddto;
     int checkconfirm = 0;
     int work = 0;
+    public int timeInterval = 5;
+    static boolean deny = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +68,7 @@ public class MocAcitivty extends Activity {
         });
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(checkinputdate()==false)
-                {
-                    Toast.makeText(MocAcitivty.this, "Giờ bắt đầu phải trước giờ bắt thúc 15 phút", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            public void onClick(View v) {
                 if(checkconfirm == 1)
                 {
                     work = 2;
@@ -84,8 +81,11 @@ public class MocAcitivty extends Activity {
                     workDTO();
                     Toast.makeText(MocAcitivty.this, "Thêm sự kiện thành công!", Toast.LENGTH_SHORT).show();
                 }
-                Intent weekviewintent = new Intent(MocAcitivty.this, WeekViewAcitivity.class);
-                startActivity(weekviewintent);
+                if(deny == false) {
+                    Intent weekviewintent = new Intent(MocAcitivty.this, WeekViewAcitivity.class);
+                    startActivity(weekviewintent);
+                }
+                else deny = false;
             }
         });
         btCancel.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +109,7 @@ public class MocAcitivty extends Activity {
     }
 
     public void workDTO() {
-        class dtoWork extends AsyncTask<Void, Void, List<String>> {
+        class dtoWork extends AsyncTask<Void, Void, String> {
             private List<String> getData = new ArrayList<>();
             @Override
             protected void onPreExecute() {
@@ -118,45 +118,172 @@ public class MocAcitivty extends Activity {
             }
 
             @Override
-            protected List<String> doInBackground(Void... params) {
+            protected String doInBackground(Void... params) {
                 //0 DELETE 1 INSERT 2 UPDATE
                 if(work == 0)
                     timeeventdao.delete(loaddto);
-                else if(work == 1) {
+                else if(work == 1)
+                {
                     loaddto = setDataListforDto(getData);
-                    timeeventdao.insert(loaddto);
+                    if(checkdto(loaddto) == true)
+                    {
+                        timeeventdao.insert(loaddto);
+                    }
+                    else
+                    {
+                        deny = true;
+                        return "Sự kiện bị trùng thời gian, không thể thêm.";
+                    }
                 }
-                else if(work == 2) {
+                else if(work == 2)
+                {
                     int id = loaddto.id;
                     loaddto = setDataListforDto(getData);
                     loaddto.id = id;
-                    timeeventdao.update(loaddto);
+                    if(checkdto(loaddto) == true)
+                    {
+                        timeeventdao.update(loaddto);
+                    }
+                    else
+                    {
+                        deny = true;
+                        return "Sự kiện bị trùng thời gian, không thể sửa.";
+                    }
                 }
-                return null;
+                return "";
+            }
+
+            @Override
+            protected void onPostExecute(String strings) {
+                super.onPostExecute(strings);
+                if(!strings.equals(""))
+                    Toast.makeText(MocAcitivty.this, strings, Toast.LENGTH_SHORT).show();
             }
         }
         new dtoWork().execute();
     }
 
+    public static boolean checkdto(timeeventdto checkdto)
+    {
+        List<timeeventdto> listdto = timeeventdao.getall();
+        for(timeeventdto dto : listdto)
+        {
+            if(dto.dayselect.equals((checkdto.dayselect)) && dto.id != checkdto.id)
+            {
+                int checkcase = checkDupplicateDate(checkdto.timestart, checkdto.timeend, dto.timestart, dto.timeend);
+
+                if(checkcase  == define.COMPDATE.SAME)
+                    return false;
+                else if(checkcase == define.COMPDATE.INSIDEA)
+                    splitdto(checkdto, dto, 1, true);
+                else if(checkcase == define.COMPDATE.INSIDEB)
+                    splitdto(checkdto, dto, 1, false);
+                else if(checkcase == define.COMPDATE.BEFOREA)
+                    splitdto(checkdto, dto, 2, true);
+                else if(checkcase == define.COMPDATE.BEFOREB)
+                    splitdto(checkdto, dto, 2, false);
+                else if(checkcase == define.COMPDATE.SMEETA)
+                    splitdto(checkdto, dto, 3, false);
+                else if(checkcase == define.COMPDATE.SMEETB)
+                    splitdto(checkdto, dto, 3, true);
+                else if(checkcase == define.COMPDATE.EMEETA)
+                    splitdto(checkdto, dto, 4, false);
+                else if(checkcase == define.COMPDATE.EMEETB)
+                    splitdto(checkdto, dto, 4, true);
+            }
+        }
+        return true;
+    }
+
+    public static int checkDupplicateDate(Date timesa, Date timeea, Date timesb, Date timeeb)
+    {
+        if(timesa.equals(timesb) && timeea.equals(timeeb))
+            return define.COMPDATE.SAME;
+        else if(timesa.before(timesb) && timeea.after(timeeb))
+            return define.COMPDATE.INSIDEA;
+        else if(timesb.before(timesa) && timeeb.after(timeea))
+            return define.COMPDATE.INSIDEB;
+        else if(timesa.before(timesb) && timeea.before(timeeb) && timesb.before(timeea))
+            return define.COMPDATE.BEFOREA;
+        else if(timesb.before(timesa) && timeeb.before(timeea) && timesa.before(timeeb))
+            return define.COMPDATE.BEFOREB;
+        else if(timesa.equals(timesb) && timeea.before(timeeb))
+            return define.COMPDATE.SMEETA;
+        else if(timesa.equals(timesb) && timeeb.before(timeea))
+            return define.COMPDATE.SMEETB;
+        else if(timesb.before(timesa) && timeea.equals(timeeb))
+            return define.COMPDATE.EMEETA;
+        else if(timesa.before(timesb) && timeea.equals(timeeb))
+            return define.COMPDATE.EMEETB;
+        return define.COMPDATE.OUT;
+    }
+
+    public static void splitdto(timeeventdto childdto, timeeventdto dto, int scase, boolean bigger)
+    {
+        if(scase == 1) {
+            if(bigger == true)
+            {
+                timeeventdto splitdto = new timeeventdto(childdto);
+                splitdto.timestart = dto.timeend;
+                timeeventdao.insert(splitdto);
+                childdto.timeend = dto.timestart;
+            }
+            else
+            {
+                timeeventdto splitdto = new timeeventdto(dto);
+                dto.timeend = childdto.timestart;
+                timeeventdao.update(dto);
+                splitdto.timestart = childdto.timeend;
+                timeeventdao.insert(dto);
+            }
+        }
+        else if(scase == 2)
+        {
+            if(bigger == true) {
+                dto.timestart = childdto.timeend;
+                timeeventdao.update(dto);
+            }
+            else
+            {
+                dto.timeend = childdto.timestart;
+                timeeventdao.update(dto);
+            }
+        }
+        else if(scase == 3)
+        {
+            if(bigger == false)
+            {
+                dto.timestart = childdto.timeend;
+                timeeventdao.update(dto);
+            }
+            else
+            {
+                childdto.timestart = dto.timeend;
+            }
+        }
+        else if(scase == 4)
+        {
+            if(bigger == false)
+            {
+                dto.timeend = childdto.timestart;
+                timeeventdao.update(dto);
+            }
+            else
+            {
+                childdto.timeend = dto.timestart;
+            }
+        }
+    }
     public static timeeventdto setDataListforDto(List<String> getData)
     {
         timeeventdto dto = new timeeventdto();
         dto.note = getData.get(0);
-        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
-        try {
-            dto.timestart = sf.parse(getData.get(1));
-            dto.timeend = sf.parse(getData.get(2));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        sf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            dto.dayselect = sf.parse(getData.get(3));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        dto.timestart = format.parseTime(getData.get(1));
+        dto.timeend = format.parseTime(getData.get(2));
+        dto.dayselect = parseTextDate(getData.get(3));
         dto.userid = database.sessionuser.id;
+        dto.textcolor = "0xffff0000";
+        dto.bgcolor = "0xffffffff";
         return dto;
     }
 
@@ -201,13 +328,20 @@ public class MocAcitivty extends Activity {
         TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if(minute % timeInterval != 0)
+                {
+                    int minuteFloor=minute-(minute%timeInterval);
+                    minute=minuteFloor + (minute==minuteFloor+1 ? timeInterval : 0);
+                    if (minute==60)
+                        minute=0;
+                    //view.setCurrentMinute(minute);
+                }
                 btTimestart.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
             }
         },
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE),
                 true);
-
         tpd.show();
     }
     void timeend()
@@ -215,13 +349,20 @@ public class MocAcitivty extends Activity {
         TimePickerDialog tpd = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if(minute % timeInterval != 0)
+                {
+                    int minuteFloor=minute-(minute%timeInterval);
+                    minute=minuteFloor + (minute==minuteFloor+1 ? timeInterval : 0);
+                    if (minute==60)
+                        minute=0;
+                    //view.setCurrentMinute(minute);
+                }
                 btTimeend.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
             }
         },
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE),
                 true);
-
         tpd.show();
     }
     void dayselect()
@@ -237,23 +378,27 @@ public class MocAcitivty extends Activity {
                 cal.get(Calendar.DAY_OF_MONTH));
         dpd.show();
     }
-    boolean checkinputdate()
+
+    public static Date parseTextDate(String date)
     {
-        Date giobd,giokt = null;
-        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date tmp = null;
         try {
-            giobd = sf.parse(btTimestart.getText().toString());
-            giokt = sf.parse(btTimeend.getText().toString());
-            if(giobd.before(giokt))
-            {
-                long millis=giokt.getTime()-giobd.getTime();
-                if(millis>=900000)
-                    return true;
-            }
+            tmp = sf.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return false;
-    }
 
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(tmp);
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        tmp = cal.getTime();
+
+        return tmp;
+    }
 }

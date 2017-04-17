@@ -1,6 +1,5 @@
 package com.example.thienpham.time_remider;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,28 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import object.dao.periodeventdao;
-import object.dao.timeeventdao;
 import object.dao.userdao;
 import object.database;
-import object.dto.periodeventdto;
-import object.dto.timeeventdto;
 import object.dto.userdto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
-import static android.R.id.edit;
 
 public class MainActivity extends AppCompatActivity {
     //Khai bao gia tri
     private Button btDangnhap,btDangkiMain;
+    private TextView tvBack;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Anh xa actitivy_main.xml
         btDangnhap=(Button) findViewById(R.id.btDangnhap);
-        btDangkiMain=(Button) findViewById(R.id.btDangkiMain);
 
-        btDangkiMain.setOnClickListener(new View.OnClickListener() {
+        tvBack = (TextView) findViewById(R.id.tvBackmain);
+        tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(intent);
             }
         });
+
         btDangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

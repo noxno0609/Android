@@ -1,226 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context="com.example.thienpham.time_remider.LichtrinhActivity">
-
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="11dp"
-            android:text="Lịch trình"
-            android:textColor="#2962ff"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/etNameLT"
-            android:layout_marginTop="26dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textColor="#2962ff"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="72dp">
-
-            <Button
-                android:id="@+id/btDaystart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-
-                android:hint="Ngày bắt đầu"
-                android:inputType="date"
-                android:textAlignment="center"
-                android:textColor="#2962ff" />
-
-            <Button
-                android:id="@+id/btDayend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Ngày kết thúc"
-                android:inputType="date"
-                android:textAlignment="center"
-                android:textColor="#2962ff" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/linearLayout"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="115dp">
-
-            <Button
-                android:id="@+id/btTimestart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Giờ bắt đầu"
-                android:inputType="time"
-                android:textAlignment="center"
-                android:textColor="#2962ff" />
-
-            <Button
-                android:id="@+id/btTimeend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Giờ kết thúc"
-                android:inputType="time"
-                android:textAlignment="center"
-                android:textColor="#2962ff" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            tools:layout_editor_absoluteX="21dp"
-            tools:layout_editor_absoluteY="207dp">
-
-            <CheckBox
-                android:id="@+id/cbT2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="T2" />
-
-            <CheckBox
-                android:id="@+id/cbT3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="T3" />
-
-            <CheckBox
-                android:id="@+id/cbT4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="T4" />
-
-            <CheckBox
-                android:id="@+id/cbT5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="T5" />
-
-            <CheckBox
-                android:id="@+id/cbT6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="T6" />
-
-            <CheckBox
-                android:id="@+id/cbT7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="T7" />
-
-            <CheckBox
-                android:id="@+id/cbCN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="CN" />
-
-
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/etNameLT"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginTop="12dp"
-            android:ems="10"
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@android:color/holo_blue_dark"
+>
+    <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="center"
-            android:hint="Tên lịch trình"
-            android:inputType="textPersonName"
-            android:textColorLink="@color/colorPrimary" />
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+
+    >
 
         <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="100dp"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:layout_below="@+id/spinner" android:layout_centerHorizontal="true"
-                android:layout_marginTop="18dp" android:id="@+id/etltNote" android:hint="Nhập nội dung lịch trình"/>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
-            <Button
-                    android:text="Thêm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/btConfirm" android:layout_weight="1"/>
-            <Button
-                    android:text="Hủy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/btCancel" android:layout_weight="1"/>
-        </LinearLayout>
-        <CheckBox
-                android:id="@+id/cbMoingay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/etNameLT"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.63"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
                 android:gravity="center"
+                android:hint="TÊN LỊCH TRÌNH"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                android:textAlignment="center"
+                android:textColorHint="#ececec"
+        />
+
+        <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="0dp"
+        >
+
+            <LinearLayout
+                    android:id="@+id/layout2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+            >
+                <Button
+                        android:id="@+id/btDaystart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="date"
+                        android:hint="Ngày bắt đầu"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                />
+
+                <Button
+                        android:id="@+id/btDayend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="date"
+                        android:hint="Ngày kết thúc"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout2_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+            >
+                <Button
+                        android:id="@+id/btTimestart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="time"
+                        android:hint="Giờ bắt đầu"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                />
+
+                <Button
+                        android:id="@+id/btTimeend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:inputType="time"
+                        android:hint="Giờ kết thúc"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout2_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1.1"
+            >
+                <CheckBox
+                        android:id="@+id/cbT2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="T2"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+
+                <CheckBox
+                        android:id="@+id/cbT3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="T3"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+
+                <CheckBox
+                        android:id="@+id/cbT4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="T4"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+
+                <CheckBox
+                        android:id="@+id/cbT5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="T5"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+
+                <CheckBox
+                        android:id="@+id/cbT6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="T6"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+
+                <CheckBox
+                        android:id="@+id/cbT7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="T7"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+
+                <CheckBox
+                        android:id="@+id/cbCN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="CN"
+                        android:textSize="11sp"
+                        android:textAlignment="center"
+                        android:textStyle="normal"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout2_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1.15"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+            >
+
+                <CheckBox
+                        android:id="@+id/cbMoingay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Mỗi ngày"
+                />
+
+                <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                >
+                </Spinner>
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+                android:id="@+id/etltNote"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/shape"
+                android:hint="Nội dung ghi chú..."
+                android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Mỗi ngày" android:layout_below="@+id/linearLayout3"
-                android:layout_alignLeft="@+id/etNameLT" android:layout_alignStart="@+id/etNameLT"/>
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:entries="@array/color"
-            android:layout_alignBottom="@+id/cbMoingay" android:layout_toRightOf="@+id/cbMoingay"
-            android:layout_toEndOf="@+id/cbMoingay" android:layout_marginLeft="28dp" android:layout_marginStart="28dp"/>
+                android:gravity="top"
+        />
 
+        <LinearLayout
+                android:id="@+id/layout1_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1.6"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+        >
+            <Button
+                    android:id="@+id/btConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="0dp"
+                    android:text="Thêm"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+            />
 
-    </RelativeLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+            <Button
+                    android:id="@+id/btCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="0dp"
+                    android:text="Huỷ bỏ"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+            />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

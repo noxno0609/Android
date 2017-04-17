@@ -5,6 +5,7 @@
         android:id="@+id/activity_lich_trinh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -24,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.5">
             <Button
-                    android:text="BACK"
+                    android:text="Quay lại"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btBack"
@@ -34,16 +35,19 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"/>
             <Button
-                    android:text="ADD"
+                    android:text="Thêm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btltAdd"
                     android:layout_weight="5"/>
         </LinearLayout>
         <ListView
+                android:id="@+id/lvlichtrinh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.15" android:id="@+id/lvlichtrinh" android:headerDividersEnabled="false">
+                android:layout_weight="0.15"
+                android:background="@drawable/shape"
+                android:headerDividersEnabled="false">
         </ListView>
     </LinearLayout>
 </RelativeLayout>

@@ -8,10 +8,7 @@ import object.dto.periodeventdto;
 import object.dto.timeeventdto;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by BenX on 30/03/2017.
@@ -44,10 +41,12 @@ public class util {
     public static List<Integer> getSelectDay(String dayselect)
     {
         List<Integer> result = new ArrayList<>();
-        for(int i=0;i<dayselect.length();i++)
+        for(int i=1;i<dayselect.length()+1;i++)
         {
-            if(dayselect.charAt(i) == '1')
-                result.add(i);
+            if(dayselect.charAt(i-1) == '1') {
+                if(i == 7) result.add(0);
+                else result.add(i);
+            }
         }
         return result;
     }
@@ -76,7 +75,7 @@ public class util {
             }
             case define.HOUR:
             {
-                c.add(Calendar.HOUR, number);
+                c.add(Calendar.HOUR_OF_DAY, number);
                 break;
             }
             case define.MINUTE:

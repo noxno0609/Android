@@ -9,6 +9,21 @@ import java.util.Date;
  */
 public class timeeventdto implements Serializable {
 
+    public timeeventdto()
+    {
+    }
+
+    public timeeventdto(timeeventdto dto)
+    {
+        this.userid = dto.userid;
+        this.timestart = dto.timestart;
+        this.timeend = dto.timeend;
+        this.dayselect = dto.dayselect;
+        this.note = dto.note;
+        this.pe_id = dto.pe_id;
+        this.bgcolor = dto.bgcolor;
+        this.textcolor = dto.textcolor;
+    }
     public int id;
     public int userid;
     public Date timestart;
@@ -16,4 +31,6 @@ public class timeeventdto implements Serializable {
     public Date dayselect;
     public String note;
     public int pe_id;
+    public String textcolor;
+    public String bgcolor;
 }

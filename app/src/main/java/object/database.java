@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class database {
 
-    public static final String connIP = "115.74.32.179";
+    public static final String connIP = "192.168.56.1";
     public static final String connPort = "85";
     public static final String connString = connIP + ":" + connPort;
     public static userdto sessionuser = null;
@@ -211,6 +211,6 @@ public class database {
         } catch (IOException e) {
             return 0;
         }
-        return Integer.parseInt(result);
+        return 1;
     }
 }
