@@ -115,7 +115,7 @@ public class periodeventdao {
 
             for(timeeventdto tedto : listdto)
             {
-                if(ndto.dayselect.equals((tedto.dayselect)))
+                if(ndto.dayselect.equals((tedto.dayselect)) && tedto.userid == ndto.userid)
                 {
                     int checkcase = checkDupplicateDate(ndto.timestart, ndto.timeend, tedto.timestart, tedto.timeend);
 
@@ -181,7 +181,6 @@ public class periodeventdao {
             ndto.dayselect = sdate;
             timeeventdao.insert(ndto);
         }
-
         return newid;
     }
 
@@ -207,7 +206,7 @@ public class periodeventdao {
 
         for (timeeventdto tdto : listdto)
         {
-            if(tdto.pe_id == dto.id)
+            if(tdto.pe_id == dto.id && tdto.userid == dto.userid)
             {
                 if(listsdate.contains(tdto.dayselect))
                 {
@@ -300,7 +299,7 @@ public class periodeventdao {
 
         for (timeeventdto tdto : listdto)
         {
-            if(tdto.pe_id == dto.id)
+            if(tdto.pe_id == dto.id && dto.userid == dto.userid)
             {
                 if(listsdate.contains(tdto.dayselect))
                 {
@@ -339,7 +338,7 @@ public class periodeventdao {
         List<timeeventdto> listdto = timeeventdao.getall();
         for(timeeventdto tdto : listdto)
         {
-            if(tdto.pe_id == dto.id)
+            if(tdto.pe_id == dto.id && dto.userid == dto.userid)
                 timeeventdao.delete(tdto);
         }
 

@@ -168,7 +168,7 @@ public class MocAcitivty extends Activity {
         List<timeeventdto> listdto = timeeventdao.getall();
         for(timeeventdto dto : listdto)
         {
-            if(dto.dayselect.equals((checkdto.dayselect)) && dto.id != checkdto.id)
+            if(dto.dayselect.equals((checkdto.dayselect)) && dto.id != checkdto.id && dto.userid == database.sessionuser.id)
             {
                 int checkcase = checkDupplicateDate(checkdto.timestart, checkdto.timeend, dto.timestart, dto.timeend);
 
@@ -234,7 +234,7 @@ public class MocAcitivty extends Activity {
                 dto.timeend = childdto.timestart;
                 timeeventdao.update(dto);
                 splitdto.timestart = childdto.timeend;
-                timeeventdao.insert(dto);
+                timeeventdao.insert(splitdto);
             }
         }
         else if(scase == 2)
