@@ -59,6 +59,7 @@ public class SignupActivity extends AppCompatActivity {
             etUser = (EditText) findViewById(R.id.etName);
             etPassword = (EditText) findViewById(R.id.etPass);
             etEmail = (EditText) findViewById(R.id.etEmail);
+            etNumber = (EditText) findViewById(R.id.etPhone);
 
             if(etUser.length() < 3)
                 return "Tên tài khoản phải ít nhất 3 kí tự";
@@ -66,6 +67,11 @@ public class SignupActivity extends AppCompatActivity {
                 return "Mật khẩu phải có ít nhất 3 kí tự";
             if(etEmail.length() < 3)
                 return "Email phải hơn 5 kí tự";
+            if(etNumber.getText().toString().equals(""))
+                return "Chưa nhập số điện thoại";
+            if(!etEmail.getText().toString().contains("@"))
+                return "Email không hợp lệ";
+
 
             List<userdto> listdto = userdao.getall();
             for(userdto dto : listdto)
