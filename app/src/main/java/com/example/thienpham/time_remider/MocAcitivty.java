@@ -3,12 +3,17 @@ package com.example.thienpham.time_remider;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.flask.colorpicker.ColorPickerView;
+import com.flask.colorpicker.OnColorSelectedListener;
+import com.flask.colorpicker.builder.ColorPickerClickListener;
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import object.dao.timeeventdao;
 import object.database;
 import object.define;
@@ -23,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MocAcitivty extends Activity {
+    static Button btMauchu;
+    static Button btMaunen;
     static Button btTimestart;
     static Button btTimeend;
     static Button btDayselect;
@@ -41,6 +48,8 @@ public class MocAcitivty extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moc);
 
+        btMauchu = (Button) findViewById(R.id.btMauchu);
+        btMaunen = (Button) findViewById(R.id.btMaunen);
         btTimestart =(Button) findViewById(R.id.btmocTimestart);
         btTimeend =(Button) findViewById(R.id.btmocTimeend);
         btDayselect =(Button) findViewById(R.id.btmocDayselect);
@@ -127,11 +136,81 @@ public class MocAcitivty extends Activity {
                 startActivity(weekviewintent);
             }
         });
+
+        btMauchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialogBuilder
+                        .with(MocAcitivty.this)
+                        .setTitle("Chọn một màu")
+                        .initialColor(0x00000000)
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(12)
+                        .setOnColorSelectedListener(new OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(int selectedColor) {
+                                //toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
+                            }
+                        })
+                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                changeBackgroundMauchu(selectedColor);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .build()
+                        .show();
+            }
+        });
+        btMaunen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialogBuilder
+                        .with(MocAcitivty.this)
+                        .setTitle("Chọn một màu")
+                        .initialColor(0x00000000)
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(12)
+                        .setOnColorSelectedListener(new OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(int selectedColor) {
+                                //toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
+                            }
+                        })
+                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                changeBackgroundMaunen(selectedColor);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .build()
+                        .show();
+            }
+        });
         loaddto = (timeeventdto) getIntent().getSerializableExtra("dto");
         if(loaddto != null) {
             setupLoadDTO(loaddto);
             checkconfirm = 1;
         }
+    }
+
+    private void changeBackgroundMauchu(int selectedColor) {
+        Integer.toHexString(selectedColor);
+        btMauchu.setBackgroundColor(selectedColor);
+    }
+    private void changeBackgroundMaunen(int selectedColor) {
+        Integer.toHexString(selectedColor);
+        btMaunen.setBackgroundColor(selectedColor);
     }
 
     public void workDTO() {

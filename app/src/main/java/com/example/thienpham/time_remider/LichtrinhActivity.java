@@ -10,6 +10,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.flask.colorpicker.ColorPickerView;
+import com.flask.colorpicker.OnColorSelectedListener;
+import com.flask.colorpicker.builder.ColorPickerClickListener;
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import object.dao.periodeventdao;
 import object.dao.timeeventdao;
 import object.database;
@@ -24,7 +28,7 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class LichtrinhActivity extends Activity {
-    static Button btDaystart, btDayend, btTimestart, btTimeend,btCancel, btConfirm;
+    static Button btDaystart, btDayend, btTimestart, btTimeend,btCancel, btConfirm, btMauchu, btMaunen;
     static EditText etnote, etName;
     static Calendar cal = Calendar.getInstance();
     static CheckBox cbT2,cbT3,cbT4,cbT5,cbT6,cbT7,cbCN,cbMoingay;
@@ -40,6 +44,8 @@ public class LichtrinhActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_lichtrinh);
+        btMauchu = (Button) findViewById(R.id.btMauchu);
+        btMaunen = (Button) findViewById(R.id.btMaunen);
         btCancel =(Button) findViewById(R.id.btCancel);
         btConfirm = (Button) findViewById(R.id.btConfirm);
         btTimestart = (Button) findViewById(R.id.btTimestart);
@@ -168,6 +174,7 @@ public class LichtrinhActivity extends Activity {
                 startActivity(intent);
             }
         });
+
         btTimestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,12 +206,83 @@ public class LichtrinhActivity extends Activity {
             }
         });
 
+        btMauchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialogBuilder
+                        .with(LichtrinhActivity.this)
+                        .setTitle("Chọn một màu")
+                        .initialColor(0x00000000)
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(12)
+                        .setOnColorSelectedListener(new OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(int selectedColor) {
+                                //toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
+                            }
+                        })
+                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                changeBackgroundMauchu(selectedColor);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .build()
+                        .show();
+            }
+        });
+        btMaunen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPickerDialogBuilder
+                        .with(LichtrinhActivity.this)
+                        .setTitle("Chọn một màu")
+                        .initialColor(0x00000000)
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(12)
+                        .setOnColorSelectedListener(new OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(int selectedColor) {
+                                //toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
+                            }
+                        })
+                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                changeBackgroundMaunen(selectedColor);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .build()
+                        .show();
+            }
+        });
+
         loaddto = (periodeventdto) getIntent().getSerializableExtra("dto");
         if(loaddto != null) {
             setupLoadDTO(loaddto);
             checkconfirm = 1;
         }
     }
+
+    private void changeBackgroundMauchu(int selectedColor) {
+        Integer.toHexString(selectedColor);
+        btMauchu.setBackgroundColor(selectedColor);
+    }
+    private void changeBackgroundMaunen(int selectedColor) {
+        Integer.toHexString(selectedColor);
+        btMaunen.setBackgroundColor(selectedColor);
+    }
+
 
     public void processConditionWork() throws ExecutionException, InterruptedException {
         class dtoWork extends AsyncTask<Void, Void, String> {
