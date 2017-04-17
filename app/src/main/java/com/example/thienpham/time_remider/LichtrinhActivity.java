@@ -18,6 +18,8 @@ import object.dto.timeeventdto;
 import object.format;
 import object.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -58,6 +60,57 @@ public class LichtrinhActivity extends Activity {
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(etName.getText().toString().equals(""))
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa đặt Tên lịch trình", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(etName.getText().toString().length()<=4)
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Tên lịch trình ít nhất 5 kí tự", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(btDaystart.getText().toString().equals(""))
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa nhập ngày bắt đầu", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(btDayend.getText().toString().equals(""))
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa nhập ngày kết thúc", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (checkinputdate()==false)
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Khoảng cách ít nhất là 2 ngày", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(btTimestart.getText().toString().equals(""))
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa nhập giờ bắt đầu", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(btTimeend.getText().toString().equals(""))
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa nhập giờ kết thúc", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (checkinputtime()==false)
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Thời gian tối thiểu là 15 phút", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(cbCN.isChecked()==false&&cbMoingay.isChecked()==false&&cbT2.isChecked()==false&&cbT3.isChecked()==false
+                        &&cbT4.isChecked()==false&&cbT5.isChecked()==false&&cbT6.isChecked()==false&&cbT7.isChecked()==false)
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa chọn ngày xảy ra", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(etnote.getText().toString().equals(""))
+                {
+                    Toast.makeText(LichtrinhActivity.this, "Chưa nhập nội dung", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(checkconfirm == 1)
                 {
                     work = 2;
@@ -466,5 +519,44 @@ public class LichtrinhActivity extends Activity {
             cbT7.setChecked(false);
             cbCN.setChecked(false);
         }
+    }
+    boolean checkinputtime()
+    {
+        Date giobd,giokt;
+        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+        try {
+            giobd = sf.parse(btTimestart.getText().toString());
+            giokt = sf.parse(btTimeend.getText().toString());
+            if (giobd.before(giokt)) {
+                long m = giokt.getTime()-giobd.getTime();
+                if(m>=900000)
+                    return true;
+            }
+            else
+                Toast.makeText(this, "Chọn giờ kết thúc trước giờ bắt đầu", Toast.LENGTH_SHORT).show();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    boolean checkinputdate()
+    {
+        Date ngaybd,ngaykt;
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            ngaybd = sf.parse(btDaystart.getText().toString());
+            ngaykt = sf.parse(btDayend.getText().toString());
+            if (ngaybd.before(ngaykt)) {
+                long m = ngaykt.getTime()-ngaybd.getTime();
+                if(m>=48*60*60*1000)
+                    return true;
+            }
+            else
+                Toast.makeText(this, "Chọn ngày kết thúc trước bắt đầu", Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
