@@ -69,6 +69,32 @@ public class MocAcitivty extends Activity {
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(btTimestart.getText().toString().equals(""))
+                {
+                    Toast.makeText(MocAcitivty.this, "Chưa chọn giờ bắt đầu", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(btTimeend.getText().toString().equals(""))
+                {
+                    Toast.makeText(MocAcitivty.this, "Chưa chọn giờ kết thúc", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(btDayselect.getText().toString().equals(""))
+                {
+                    Toast.makeText(MocAcitivty.this, "Chưa chọn ngày cho mốc", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (etNote.getText().toString().length()<=2)
+                {
+                    Toast.makeText(MocAcitivty.this, "Nội dung tối thiểu 3 kí tự", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(checkinput()==false)
+                {
+                    Toast.makeText(MocAcitivty.this, "Thời gian tối thiểu là 15 phút", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(checkconfirm == 1)
                 {
                     work = 2;
@@ -400,5 +426,25 @@ public class MocAcitivty extends Activity {
         tmp = cal.getTime();
 
         return tmp;
+    }
+    boolean checkinput()
+    {
+        Date giobd,giokt;
+        SimpleDateFormat sf = new SimpleDateFormat("HH:mm");
+        try {
+            giobd = sf.parse(btTimestart.getText().toString());
+            giokt = sf.parse(btTimeend.getText().toString());
+            if (giobd.before(giokt)) {
+                long m = giokt.getTime()-giobd.getTime();
+                if(m>=900000)
+                    return true;
+            }
+            else
+                Toast.makeText(this, "Chọn thời gian bắt đầu trước kết thúc", Toast.LENGTH_SHORT).show();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
