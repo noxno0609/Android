@@ -16,7 +16,7 @@ import object.dto.userdto;
 import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
-    Button btSignup;
+    Button btSignup, btBack;
     EditText etUser, etPassword, etEmail, etNumber;
     boolean success = false;
     @Override
@@ -25,6 +25,8 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         btSignup=(Button) findViewById(R.id.btSignup);
+        btBack = (Button) findViewById(R.id.btCancel);
+
         btSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +38,14 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
             }
+        });
 
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, IntroActivity.class);
+                startActivity(intent);
+            }
         });
     }
     class CheckData extends AsyncTask<String, String, String> {
@@ -84,6 +93,7 @@ public class SignupActivity extends AppCompatActivity {
             dto.Name = etUser.getText().toString();
             dto.Password = etPassword.getText().toString();
             dto.Email = etEmail.getText().toString();
+            dto.Phone = etNumber.getText().toString();
             userdao.insert(dto);
 
             success = true;

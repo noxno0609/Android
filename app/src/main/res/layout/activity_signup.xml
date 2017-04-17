@@ -3,19 +3,19 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@android:color/holo_blue_light"
         tools:context="com.example.thienpham.time_remider.SignupActivity">
 
     <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_centerHorizontal="true"
-    >
+            tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp">
 
         <ImageView
                 android:id="@+id/imageLogo"
