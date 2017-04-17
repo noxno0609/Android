@@ -66,7 +66,7 @@ public class MainLichTrinhActivity extends AppCompatActivity {
                 {
                     if(dto.userid == database.sessionuser.id)
                     {
-                        listsource.add("Lịch trình: " + dto.note + "\n" + util.readDate(dto.datestart) + " - " + util.readDate(dto.dateend));
+                        listsource.add("Lịch trình: " + dto.name + "\nNội dung: " + dto.note + "\n" + util.readDate(dto.datestart) + " - " + util.readDate(dto.dateend));
                         dtohasinserted.add(dto);
                     }
                 }

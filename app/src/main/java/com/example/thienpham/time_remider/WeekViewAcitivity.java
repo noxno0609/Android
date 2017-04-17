@@ -164,6 +164,11 @@ public class WeekViewAcitivity extends AppCompatActivity {
                                 listcellinserted.add(cellindex);
                             }
 
+                            GradientDrawable gd = new GradientDrawable();
+                            gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
+                            gd.setShape(GradientDrawable.RECTANGLE);
+                            gd.setStroke(1, 0xFF000000);
+
                             Button btcell = new Button(WeekViewAcitivity.this);
                             GridLayout.LayoutParams cellLayoutParams = new GridLayout.LayoutParams(rowPos, colPos);
                             cellLayoutParams.width = (screenWidth-viewWidth)/7;
@@ -172,7 +177,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
                             Hashtable btInfo = new Hashtable();
                             btInfo.put("params", cellLayoutParams);
                             btInfo.put("dto", dto);
-                            btcell.setBackgroundColor(Color.GREEN);
+                            btcell.setBackground(gd);
                             btMap.put(btcell, btInfo);
                         }
                     }
@@ -215,14 +220,6 @@ public class WeekViewAcitivity extends AppCompatActivity {
                         if(listinsindex.contains(cellindex))
                             continue;
 
-                        /*
-                        GradientDrawable gd = new GradientDrawable();
-                        gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
-                        gd.setCornerRadius(5);
-                        gd.setStroke(1, 0xFF000000);
-                        //TextView tv = (TextView)findViewById(R.id.textView1);
-                        //tv.setBackgroundDrawable(gd);
-                        */
                         Button btCell = new Button(WeekViewAcitivity.this);
                         btCell.setSingleLine(false);
                         GridLayout.LayoutParams cellLayoutParams = new GridLayout.LayoutParams(rowPos, colPos);

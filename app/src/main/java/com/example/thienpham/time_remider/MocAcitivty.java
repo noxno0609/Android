@@ -224,7 +224,7 @@ public class MocAcitivty extends Activity {
             if(bigger == true)
             {
                 timeeventdto splitdto = new timeeventdto(childdto);
-                splitdto.timestart = childdto.timeend;
+                splitdto.timestart = dto.timeend;
                 timeeventdao.insert(splitdto);
                 childdto.timeend = dto.timestart;
             }

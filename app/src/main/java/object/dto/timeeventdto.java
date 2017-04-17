@@ -21,6 +21,8 @@ public class timeeventdto implements Serializable {
         this.dayselect = dto.dayselect;
         this.note = dto.note;
         this.pe_id = dto.pe_id;
+        this.bgcolor = dto.bgcolor;
+        this.textcolor = dto.textcolor;
     }
     public int id;
     public int userid;

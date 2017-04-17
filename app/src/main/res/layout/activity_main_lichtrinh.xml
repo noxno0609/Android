@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.5">
             <Button
-                    android:text="BACK"
+                    android:text="Quay lại"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btBack"
@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"/>
             <Button
-                    android:text="ADD"
+                    android:text="Thêm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/btltAdd"

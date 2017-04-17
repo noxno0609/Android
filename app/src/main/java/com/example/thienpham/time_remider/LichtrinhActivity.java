@@ -1,31 +1,37 @@
 package com.example.thienpham.time_remider;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import object.dao.periodeventdao;
+import object.dao.timeeventdao;
 import object.database;
 import object.dto.periodeventdto;
+import object.dto.timeeventdto;
 import object.format;
+import object.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class LichtrinhActivity extends Activity {
     static Button btDaystart, btDayend, btTimestart, btTimeend,btCancel, btConfirm;
-    static EditText etnote;
+    static EditText etnote, etName;
     static Calendar cal = Calendar.getInstance();
     static CheckBox cbT2,cbT3,cbT4,cbT5,cbT6,cbT7,cbCN,cbMoingay;
     static periodeventdto loaddto;
     static int checkconfirm = 0;
     static public int work = 0;
     public int timeInterval = 5;
+    boolean deny = false;
+    boolean overwrite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,7 @@ public class LichtrinhActivity extends Activity {
         btDayend = (Button) findViewById(R.id.btDayend);
         cbMoingay = (CheckBox) findViewById(R.id.cbMoingay);
         etnote = (EditText) findViewById(R.id.etltNote);
+        etName = (EditText) findViewById(R.id.etNameLT);
         cbT2 = (CheckBox) findViewById(R.id.cbT2);
         cbT3 = (CheckBox) findViewById(R.id.cbT3);
         cbT4 = (CheckBox) findViewById(R.id.cbT4);
@@ -54,17 +61,37 @@ public class LichtrinhActivity extends Activity {
                 if(checkconfirm == 1)
                 {
                     work = 2;
-                    workDTO();
-                    Toast.makeText(LichtrinhActivity.this, "Lưu lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                    String content = "";
+                    try {
+                        content = workDTO();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(showsplitalert(content) == false) {
+                        Toast.makeText(LichtrinhActivity.this, "Thêm lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else
                 {
                     work = 1;
-                    workDTO();
-                    Toast.makeText(LichtrinhActivity.this, "Thêm lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                    String content = "";
+                    try {
+                        content = workDTO();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(showsplitalert(content) == false) {
+                        Toast.makeText(LichtrinhActivity.this, "Thêm lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
-                startActivity(intent);
+                if(deny == false) {
+                    Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         btCancel.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +100,16 @@ public class LichtrinhActivity extends Activity {
                 if(checkconfirm == 1)
                 {
                     work = 0;
-                    workDTO();
-                    Toast.makeText(LichtrinhActivity.this, "Xóa lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                    String content = "";
+                    try {
+                        content = workDTO();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(!content.isEmpty())
+                        Toast.makeText(LichtrinhActivity.this, content, Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
                 startActivity(intent);
@@ -118,8 +153,39 @@ public class LichtrinhActivity extends Activity {
         }
     }
 
-    public void workDTO() {
-        class dtoWork extends AsyncTask<Void, Void, List<String>> {
+    public void processConditionWork() throws ExecutionException, InterruptedException {
+        class dtoWork extends AsyncTask<Void, Void, String> {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                //0 DELETE 1 INSERT 2 UPDATE
+                if (work == 1) {
+                    if(overwrite == true)
+                        periodeventdao.insertcondition(loaddto, true);
+                    else periodeventdao.insertcondition(loaddto, false);
+                }
+                else {
+                    if(overwrite == true)
+                        periodeventdao.updatecondition(loaddto, true);
+                    else periodeventdao.updatecondition(loaddto, false);
+                }
+                return "";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+            }
+        }
+        new dtoWork().execute();
+    }
+
+    public String workDTO() throws ExecutionException, InterruptedException {
+        class dtoWork extends AsyncTask<Void, Void, String> {
             private List<String> getData = new ArrayList<>();
             @Override
             protected void onPreExecute() {
@@ -128,24 +194,105 @@ public class LichtrinhActivity extends Activity {
             }
 
             @Override
-            protected List<String> doInBackground(Void... params) {
+            protected String doInBackground(Void... params) {
                 //0 DELETE 1 INSERT 2 UPDATE
-                if(work == 0)
+                if(work == 0) {
                     periodeventdao.delete(loaddto);
+                    return "Xóa lịch trình thành công";
+                }
                 else if(work == 1) {
                     loaddto = setDataListforDto(getData);
-                    periodeventdao.insert(loaddto);
+                    if(checkdto(loaddto) == true)
+                        periodeventdao.insert(loaddto);
+                    else {
+                        deny = true;
+                        return "Lịch trình này trùng với một số sự kiện, bạn có muốn ghi lịch đè lên sự kiện cũ?";
+                    }
                 }
                 else if(work == 2) {
                     int id = loaddto.id;
                     loaddto = setDataListforDto(getData);
                     loaddto.id = id;
-                    periodeventdao.update(loaddto);
+                    if(checkdto(loaddto) == true)
+                        periodeventdao.update(loaddto);
+                    else {
+                        deny = true;
+                        return "Lịch trình này trùng với một số sự kiện, bạn có muốn ghi lịch đè lên sự kiện cũ?";
+                    }
                 }
-                return null;
+                return "";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
             }
         }
-        new dtoWork().execute();
+        return new dtoWork().execute().get();
+    }
+
+    public boolean showsplitalert(String str)
+    {
+        if(deny == true)
+        {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE: {
+                            overwrite = true;
+                            try {
+                                processConditionWork();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
+                            startActivity(intent);
+                            break;
+                        }
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            overwrite = false;
+                            try {
+                                processConditionWork();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Intent intent = new Intent(LichtrinhActivity.this, MainLichTrinhActivity.class);
+                            startActivity(intent);
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(LichtrinhActivity.this);
+            builder.setMessage(str).setPositiveButton("Có", dialogClickListener)
+                    .setNegativeButton("Không", dialogClickListener).show();
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkdto(periodeventdto dto)
+    {
+        List<Date> listsdate = util.getSelectDate(dto);
+        List<timeeventdto> listdto = timeeventdao.getall();
+
+        for (timeeventdto tdto : listdto)
+        {
+            if(tdto.userid == dto.userid)
+            {
+                if(listsdate.contains(tdto.dayselect))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static periodeventdto setDataListforDto(List<String> getData)
@@ -158,6 +305,7 @@ public class LichtrinhActivity extends Activity {
         dto.dateend = MocAcitivty.parseTextDate(getData.get(4));
         dto.dayselect = getData.get(5);
         dto.userid = database.sessionuser.id;
+        dto.name = getData.get(6);
         dto.textcolor = "0xffff0000";
         dto.bgcolor = "0xffffffff";
         return dto;
@@ -180,6 +328,7 @@ public class LichtrinhActivity extends Activity {
         dselect += (cbT7.isChecked() == true) ? "1" : "0";
         dselect += (cbCN.isChecked() == true) ? "1" : "0";
         result.add(dselect);
+        result.add(etName.getText().toString());
 
         return result;
     }
@@ -191,6 +340,7 @@ public class LichtrinhActivity extends Activity {
         btDaystart.setText(readDate(dto.datestart));
         btDayend.setText(readDate(dto.dateend));
         etnote.setText(dto.note);
+        etName.setText(dto.name);
 
         boolean ischecked = (dto.dayselect.charAt(0) == '1') ? true : false;
         cbT2.setChecked(ischecked);
