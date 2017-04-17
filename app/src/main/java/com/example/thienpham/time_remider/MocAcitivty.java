@@ -5,6 +5,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -142,8 +145,8 @@ public class MocAcitivty extends Activity {
             public void onClick(View v) {
                 ColorPickerDialogBuilder
                         .with(MocAcitivty.this)
-                        .setTitle("Chọn một màu")
-                        .initialColor(0x00000000)
+                        .setTitle("Chọn màu chữ")
+                        .initialColor(0xFF000000)
                         .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                         .density(12)
                         .setOnColorSelectedListener(new OnColorSelectedListener() {
@@ -152,13 +155,13 @@ public class MocAcitivty extends Activity {
                                 //toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
                             }
                         })
-                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                        .setPositiveButton("Chọn", new ColorPickerClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                                 changeBackgroundMauchu(selectedColor);
                             }
                         })
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
@@ -172,23 +175,22 @@ public class MocAcitivty extends Activity {
             public void onClick(View v) {
                 ColorPickerDialogBuilder
                         .with(MocAcitivty.this)
-                        .setTitle("Chọn một màu")
-                        .initialColor(0x00000000)
+                        .setTitle("Chọn màu nền")
+                        .initialColor(0xFF00CC00)
                         .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                         .density(12)
                         .setOnColorSelectedListener(new OnColorSelectedListener() {
                             @Override
                             public void onColorSelected(int selectedColor) {
-                                //toast("onColorSelected: 0x" + Integer.toHexString(selectedColor));
                             }
                         })
-                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                        .setPositiveButton("Chọn", new ColorPickerClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                                 changeBackgroundMaunen(selectedColor);
                             }
                         })
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
@@ -387,8 +389,8 @@ public class MocAcitivty extends Activity {
         dto.timeend = format.parseTime(getData.get(2));
         dto.dayselect = parseTextDate(getData.get(3));
         dto.userid = database.sessionuser.id;
-        dto.textcolor = "0xffff0000";
-        dto.bgcolor = "0xffffffff";
+        dto.textcolor = getData.get(4);
+        dto.bgcolor = getData.get(5);
         return dto;
     }
 
@@ -400,6 +402,12 @@ public class MocAcitivty extends Activity {
         result.add(btTimeend.getText().toString());
         result.add(btDayselect.getText().toString());
 
+        int color = ((ColorDrawable)btMauchu.getBackground()).getColor();
+        result.add(String.format("#%06X", (0xFFFFFF & color)));
+
+        color =  ((ColorDrawable)btMaunen.getBackground()).getColor();
+        result.add(String.format("#%06X", (0xFFFFFF & color)));
+
         return result;
     }
 
@@ -409,6 +417,8 @@ public class MocAcitivty extends Activity {
         btTimeend.setText(readTime(dto.timeend));
         btDayselect.setText(readDate(dto.dayselect));
         etNote.setText(dto.note);
+        btMauchu.setBackgroundColor(Color.parseColor(dto.textcolor));
+        btMaunen.setBackgroundColor(Color.parseColor(dto.bgcolor));
         btConfirm.setText("Lưu");
         btCancel.setText("Xóa");
     }

@@ -165,11 +165,12 @@ public class WeekViewAcitivity extends AppCompatActivity {
                             }
 
                             GradientDrawable gd = new GradientDrawable();
-                            gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
+                            gd.setColor(Color.parseColor(dto.bgcolor)); // Changes this drawbale to use a single color instead of a gradient
                             gd.setShape(GradientDrawable.RECTANGLE);
                             gd.setStroke(1, 0xFF000000);
 
                             Button btcell = new Button(WeekViewAcitivity.this);
+                            btcell.setTextColor(Color.parseColor(dto.textcolor));
                             GridLayout.LayoutParams cellLayoutParams = new GridLayout.LayoutParams(rowPos, colPos);
                             cellLayoutParams.width = (screenWidth-viewWidth)/7;
                             cellLayoutParams.height = 10*rowlength;

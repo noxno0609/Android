@@ -87,6 +87,7 @@ public class MainLichTrinhActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         periodeventdto dto = dtohasinserted.get(position);
+                        parent.getChildAt(position).setBackgroundColor(Color.parseColor(dto.bgcolor));
 
                         Intent intent = new Intent(MainLichTrinhActivity.this, LichtrinhActivity.class);
                         intent.putExtra("dto", dto);
