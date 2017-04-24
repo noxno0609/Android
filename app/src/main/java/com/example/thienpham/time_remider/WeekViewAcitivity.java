@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -33,6 +35,18 @@ public class WeekViewAcitivity extends AppCompatActivity {
     public static Button btLichTrinh;
     Calendar cal = Calendar.getInstance();
 
+    Handler myHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +134,6 @@ public class WeekViewAcitivity extends AppCompatActivity {
                 super.onPreExecute();
                 weekview.removeAllViews();
                 createWeekViewBone();
-                //Create Header
                 weekdates = getWeekDates(formatDate(nowDate));
                 weekdaylayout.removeAllViews();
                 for(int i=0;i<7;i++)
@@ -238,6 +251,7 @@ public class WeekViewAcitivity extends AppCompatActivity {
                     if(r == numborder)
                         numborder+=12;
                 }
+                myHandler.sendEmptyMessage(0);
             }
         }
         new weekViewWork().execute();

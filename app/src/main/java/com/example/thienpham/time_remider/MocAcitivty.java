@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +47,19 @@ public class MocAcitivty extends Activity {
     int work = 0;
     public int timeInterval = 5;
     static boolean deny = false;
+
+    Handler myHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,6 +280,7 @@ public class MocAcitivty extends Activity {
                 super.onPostExecute(strings);
                 if(!strings.equals(""))
                     Toast.makeText(MocAcitivty.this, strings, Toast.LENGTH_SHORT).show();
+                myHandler.sendEmptyMessage(0);
             }
         }
         new dtoWork().execute();

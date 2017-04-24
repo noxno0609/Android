@@ -3,6 +3,8 @@ package com.example.thienpham.time_remider;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,18 @@ public class SignupActivity extends AppCompatActivity {
     Button btSignup, btBack;
     EditText etUser, etPassword, etEmail, etNumber;
     boolean success = false;
+    Handler myHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +125,7 @@ public class SignupActivity extends AppCompatActivity {
                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(intent);
             }
+            myHandler.sendEmptyMessage(0);
         }
     }
 }

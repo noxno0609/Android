@@ -3,6 +3,8 @@ package com.example.thienpham.time_remider;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,18 @@ public class MainActivity extends AppCompatActivity {
     private Button btDangnhap,btDangkiMain;
     private TextView tvBack;
 
+    Handler myHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -100,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, WeekViewAcitivity.class);
                 startActivity(intent);
             }
+            myHandler.sendEmptyMessage(0);
         }
 
     }
-
 }
 

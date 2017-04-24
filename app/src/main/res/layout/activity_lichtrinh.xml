@@ -40,9 +40,8 @@
         <LinearLayout
                 android:id="@+id/layout2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="197dp"
                 android:orientation="vertical"
-                android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="0dp"
@@ -298,8 +297,7 @@
             <EditText
                     android:id="@+id/etltNote"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_height="156dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="0dp"

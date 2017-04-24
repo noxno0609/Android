@@ -82,7 +82,7 @@ public class periodeventdao {
 
     public static int insertcondition(periodeventdto dto, boolean overwrite)
     {
-        List nameValuePair = new ArrayList(7);
+        List nameValuePair = new ArrayList(10);
         nameValuePair.add(new BasicNameValuePair("PE-TimeStart", format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("PE-TimeEnd", format.addSQLTime(dto.timeend)));
         nameValuePair.add(new BasicNameValuePair("PE-DateStart", format.addSQLDate(dto.datestart)));
@@ -151,14 +151,14 @@ public class periodeventdao {
 
     public static int insert(periodeventdto dto)
     {
-        List nameValuePair = new ArrayList(7);
+        List nameValuePair = new ArrayList(10);
         nameValuePair.add(new BasicNameValuePair("PE-TimeStart", format.addSQLTime(dto.timestart)));
         nameValuePair.add(new BasicNameValuePair("PE-TimeEnd", format.addSQLTime(dto.timeend)));
         nameValuePair.add(new BasicNameValuePair("PE-DateStart", format.addSQLDate(dto.datestart)));
         nameValuePair.add(new BasicNameValuePair("PE-DateEnd", format.addSQLDate(dto.dateend)));
         nameValuePair.add(new BasicNameValuePair("PE-DaySelect",dto.dayselect.toString().trim()));
-        nameValuePair.add(new BasicNameValuePair("PE-Note",dto.note.toString()));
-        nameValuePair.add(new BasicNameValuePair("PE-Name", dto.name.toString()));
+        nameValuePair.add(new BasicNameValuePair("PE-Note",dto.note.toString().trim()));
+        nameValuePair.add(new BasicNameValuePair("PE-Name", dto.name.toString().trim()));
         nameValuePair.add(new BasicNameValuePair("PE-UserID",Integer.toString(dto.userid)));
         nameValuePair.add(new BasicNameValuePair("PE-TextColor", dto.textcolor.toString()));
         nameValuePair.add(new BasicNameValuePair("PE-BGColor", dto.bgcolor.toString()));
@@ -213,6 +213,8 @@ public class periodeventdao {
                     tdto.timestart = dto.timestart;
                     tdto.timeend = dto.timeend;
                     tdto.note = dto.note;
+                    tdto.bgcolor = dto.bgcolor;
+                    tdto.textcolor = dto.textcolor;
                     timeeventdao.update(tdto);
                     listinsdate.add(tdto.dayselect);
                 }
@@ -306,6 +308,8 @@ public class periodeventdao {
                     tdto.timestart = dto.timestart;
                     tdto.timeend = dto.timeend;
                     tdto.note = dto.note;
+                    tdto.bgcolor = dto.bgcolor;
+                    tdto.textcolor = dto.textcolor;
                     timeeventdao.update(tdto);
                     listinsdate.add(tdto.dayselect);
                 }

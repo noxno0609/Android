@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -23,6 +25,19 @@ import java.util.*;
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 
 public class MainLichTrinhActivity extends AppCompatActivity {
+
+    Handler myHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +102,14 @@ public class MainLichTrinhActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         periodeventdto dto = dtohasinserted.get(position);
-                        parent.getChildAt(position).setBackgroundColor(Color.parseColor(dto.bgcolor));
+                        //parent.getChildAt(position).setBackgroundColor(Color.parseColor(dto.bgcolor));
 
                         Intent intent = new Intent(MainLichTrinhActivity.this, LichtrinhActivity.class);
                         intent.putExtra("dto", dto);
                         startActivity(intent);
                     }
                 });
+                myHandler.sendEmptyMessage(0);
             }
         }
         new LichTrinhWork().execute();

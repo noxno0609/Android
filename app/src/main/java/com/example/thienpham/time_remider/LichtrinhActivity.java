@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.*;
 import com.flask.colorpicker.ColorPickerView;
@@ -40,6 +42,20 @@ public class LichtrinhActivity extends Activity {
     public int timeInterval = 5;
     boolean deny = false;
     boolean overwrite = false;
+    boolean inserting = true;
+
+    Handler myHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +146,9 @@ public class LichtrinhActivity extends Activity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if(showsplitalert(content) == false) {
-                        Toast.makeText(LichtrinhActivity.this, "Thêm lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                    if (showsplitalert(content) == false) {
+                        Toast.makeText(LichtrinhActivity.this, "Sửa lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                        //inserting = true;
                     }
                 }
                 else
@@ -145,8 +162,17 @@ public class LichtrinhActivity extends Activity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    while(inserting == true)
+                    {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     if(showsplitalert(content) == false) {
                         Toast.makeText(LichtrinhActivity.this, "Thêm lịch trình thành công!", Toast.LENGTH_SHORT).show();
+                        inserting = true;
                     }
                 }
                 if(deny == false) {
@@ -311,6 +337,7 @@ public class LichtrinhActivity extends Activity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                myHandler.sendEmptyMessage(0);
             }
         }
         new dtoWork().execute();
@@ -334,8 +361,10 @@ public class LichtrinhActivity extends Activity {
                 }
                 else if(work == 1) {
                     loaddto = setDataListforDto(getData);
-                    if(checkdto(loaddto) == true)
+                    if(checkdto(loaddto) == true) {
                         periodeventdao.insert(loaddto);
+                        inserting = false;
+                    }
                     else {
                         deny = true;
                         return "Lịch trình này trùng với một số sự kiện, bạn có muốn ghi lịch đè lên sự kiện cũ?";
@@ -345,8 +374,10 @@ public class LichtrinhActivity extends Activity {
                     int id = loaddto.id;
                     loaddto = setDataListforDto(getData);
                     loaddto.id = id;
-                    if(checkdto(loaddto) == true)
+                    if(checkdto(loaddto) == true) {
                         periodeventdao.update(loaddto);
+                        //inserting = false;
+                    }
                     else {
                         deny = true;
                         return "Lịch trình này trùng với một số sự kiện, bạn có muốn ghi lịch đè lên sự kiện cũ?";
@@ -358,6 +389,7 @@ public class LichtrinhActivity extends Activity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                myHandler.sendEmptyMessage(0);
             }
         }
         return new dtoWork().execute().get();
@@ -418,13 +450,21 @@ public class LichtrinhActivity extends Activity {
         {
             if(tdto.userid == dto.userid)
             {
-                if(listsdate.contains(tdto.dayselect))
+                if(listsdate.contains(tdto.dayselect) && ismeet(tdto, dto))
                 {
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    public static boolean ismeet(timeeventdto dto1, periodeventdto dto2)
+    {
+        if(((dto1.timestart.before(dto2.timestart) && (dto1.timeend.before(dto2.timestart) || dto1.timeend.equals(dto2.timestart))
+                || (dto1.timestart.after(dto2.timeend) || dto1.timestart.equals(dto2.timeend)) && dto1.timeend.after(dto2.timeend))))
+            return false;
+        else return true;
     }
 
     public static periodeventdto setDataListforDto(List<String> getData)
@@ -446,8 +486,8 @@ public class LichtrinhActivity extends Activity {
     public static List<String> getDataList()  {
         List<String> result = new ArrayList<>();
 
-        result.add(etnote.getText().toString());
-        result.add(btTimestart.getText().toString());
+        result.add(etnote.getText().toString().trim());
+        result.add(btTimestart.getText().toString().trim());
         result.add(btTimeend.getText().toString());
         result.add(btDaystart.getText().toString());
         result.add(btDayend.getText().toString());
@@ -461,7 +501,7 @@ public class LichtrinhActivity extends Activity {
         dselect += (cbCN.isChecked() == true) ? "1" : "0";
 
         result.add(dselect);
-        result.add(etName.getText().toString());
+        result.add(etName.getText().toString().trim());
 
         int color = ((ColorDrawable)btMauchu.getBackground()).getColor();
         result.add(String.format("#%06X", (0xFFFFFF & color)));
